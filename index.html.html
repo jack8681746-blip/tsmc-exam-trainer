@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台積電技術員 英文＋數學 模擬訓練 V8</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#e4e7ec;--blue:#165dcc;--blue2:#0f4da8;--green:#16803a;--red:#c52a24;--orange:#b66b00;--purple:#6840c6;--soft:#eef5ff;--shadow:0 10px 28px rgba(16,24,40,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Microsoft JhengHei","Noto Sans TC",Arial,sans-serif}button,input,select,textarea{font:inherit}.wrap{max-width:1120px;margin:auto;padding:18px}.hero{background:linear-gradient(135deg,#0d56c6,#173b82);color:#fff;border-radius:22px;padding:24px;box-shadow:0 14px 34px rgba(13,86,198,.2)}.hero h1{margin:0 0 7px;font-size:29px}.hero p{margin:5px 0;opacity:.94}.tiny{font-size:12px;color:var(--muted)}.hero .tiny{color:#d8e7ff}.topnav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.topnav button{border:1px solid var(--line);background:#fff;padding:9px 13px;border-radius:10px;cursor:pointer;font-weight:700}.topnav button.active{background:var(--blue);border-color:var(--blue);color:#fff}.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow)}.span4{grid-column:span 4}.span5{grid-column:span 5}.span6{grid-column:span 6}.span7{grid-column:span 7}.span8{grid-column:span 8}.span12{grid-column:span 12}h2{font-size:20px;margin:0 0 13px}h3{font-size:16px;margin:0 0 9px}.subjectgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}.subject{min-height:260px;border:1px solid var(--line);border-radius:20px;padding:24px;background:#fff;box-shadow:var(--shadow);cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;transition:.15s}.subject:hover{transform:translateY(-2px);border-color:#a9bfe1}.subject .icon{font-size:46px}.subject h2{font-size:27px}.subject.math{background:linear-gradient(180deg,#fff,#fbf8ff)}.subject.eng{background:linear-gradient(180deg,#fff,#f7fbff)}.statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{background:#f8fafc;border:1px solid var(--line);border-radius:13px;padding:12px;text-align:center}.stat b{font-size:24px;display:block}.stat span{font-size:12px;color:var(--muted)}.progress{height:11px;border-radius:999px;background:#e9edf3;overflow:hidden}.progress>div{height:100%;background:var(--blue);transition:.25s}.btn{border:0;border-radius:11px;padding:11px 15px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff}.primary:hover{background:var(--blue2)}.mathbtn{background:var(--purple);color:#fff}.secondary{background:#eaf2ff;color:#184b9b}.danger{background:#fff0ef;color:#a51d18}.ghost{background:#fff;border:1px solid var(--line);color:#344054}.btn:disabled{opacity:.5;cursor:not-allowed}.actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.modegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.mode{border:1px solid var(--line);background:#fff;border-radius:13px;padding:13px;text-align:left;cursor:pointer}.mode:hover{border-color:#99b9e9;background:#f8fbff}.mode b{display:block;margin-bottom:4px}.note{background:#fff8e8;border:1px solid #f5d38a;color:#7a4a00;padding:11px 13px;border-radius:12px;font-size:13px;line-height:1.55}.good{background:#edf9f1;border:1px solid #a9dfb8;color:#126b2d}.bad{background:#fff0ef;border:1px solid #f0b4b0;color:#a51d18}.memorytip{margin-top:10px;padding:11px 12px;border-radius:11px;background:#fff8df;border:1px dashed #e4b84f;color:#684b00;line-height:1.65}.studybox{max-width:820px;margin:0 auto}.studytop{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.pill{border-radius:999px;background:#eef4ff;color:#184b9b;padding:6px 10px;font-size:12px;font-weight:800}.pill.mathpill{background:#f2ebff;color:#5c36a7}.question{font-size:32px;font-weight:900;text-align:center;line-height:1.45;margin:25px 0 8px}.subq{text-align:center;color:var(--muted);min-height:24px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.choice{border:1px solid #d9dee8;background:#fff;border-radius:12px;padding:13px;cursor:pointer;text-align:left;font-weight:700}.choice:hover{border-color:#8db0e8;background:#f7fbff}.choice.correct{background:#edf9f1;border-color:#8fd0a1;color:#146b2e}.choice.wrong{background:#fff0ef;border-color:#efaaa5;color:#a51d18}.answerinput{width:100%;padding:14px;border:1px solid #cdd5df;border-radius:12px;font-size:18px;margin-top:18px;text-align:center}.scratch{width:100%;min-height:85px;padding:10px;border:1px dashed #cfd5df;border-radius:10px;margin-top:12px;resize:vertical}.feedback{display:none;margin-top:14px;padding:12px 14px;border-radius:12px;line-height:1.6}.feedback.show{display:block}.flash{border:1px solid var(--line);border-radius:18px;padding:28px;text-align:center;min-height:260px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;background:linear-gradient(#fff,#fbfdff)}.flash .en{font-size:38px;font-weight:900}.flash .zh{font-size:26px;margin-top:13px}.flash .hint{font-size:12px;color:var(--muted);margin-top:16px}.levels{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-top:12px}.lvl{text-align:center;border-radius:10px;padding:8px 4px;background:#f6f8fb;font-size:11px}.lvl b{display:block;font-size:18px}table{width:100%;border-collapse:collapse}th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}th{position:sticky;top:0;background:#f8fafc;z-index:1}.tablewrap{max-height:610px;overflow:auto;border:1px solid var(--line);border-radius:12px}.searchbar{display:grid;grid-template-columns:1fr 170px 170px;gap:8px;margin-bottom:10px}.searchbar input,.searchbar select,.form select,.form input{width:100%;padding:10px;border:1px solid #cfd6e0;border-radius:10px;background:#fff}.form label{display:block;margin:10px 0 5px;font-weight:700}.badge{display:inline-block;padding:3px 7px;border-radius:999px;font-size:11px;font-weight:800}.b0{background:#f2f4f7;color:#667085}.b1{background:#fff3e8;color:#9a5800}.b2{background:#fff8d8;color:#7a6200}.b3{background:#eaf4ff;color:#1855a0}.b4{background:#eaf9ef;color:#187138}.b5{background:#dff6e7;color:#0f672e}.unitgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.unitbtn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;cursor:pointer}.unitbtn:hover{border-color:#93b3e2}.examAnswer{font-size:14px;color:var(--muted);margin-top:5px}.kbd{font-size:11px;padding:2px 6px;border:1px solid #cfd5df;border-bottom-width:2px;border-radius:5px;background:#fff}.catgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.cat{border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px;cursor:pointer}.cat:hover{border-color:#b5a2df;background:#fbf9ff}.mathsteps{background:#f7f4ff;border-left:4px solid var(--purple);padding:12px 14px;border-radius:8px;margin-top:10px;line-height:1.7}.timerBig{font-variant-numeric:tabular-nums;font-weight:900}.footer{color:#667085;font-size:12px;text-align:center;padding:20px 0 8px;line-height:1.6}
+@media(max-width:800px){.wrap{padding:11px}.hero{padding:19px}.hero h1{font-size:24px}.subjectgrid{grid-template-columns:1fr}.subject{min-height:210px}.span4,.span5,.span6,.span7,.span8,.span12{grid-column:span 12}.statrow{grid-template-columns:repeat(2,1fr)}.modegrid{grid-template-columns:1fr}.choices{grid-template-columns:1fr}.question{font-size:26px}.searchbar{grid-template-columns:1fr}.unitgrid,.catgrid{grid-template-columns:repeat(2,1fr)}.levels{grid-template-columns:repeat(3,1fr)}}
+
+.mathvisual{margin:16px auto 6px;max-width:680px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px;overflow:auto}
+.mathvisual:empty{display:none}
+.mathvisual svg{display:block;width:100%;height:auto;max-height:360px}
+.mathvisual table{width:100%;border-collapse:collapse}
+.mathvisual th,.mathvisual td{border:1px solid #d8dee8;padding:9px;text-align:center}
+.mathvisual th{background:#f7f8fb}
+.axislabel{font-size:12px;fill:#475467}
+.chartlabel{font-size:12px;fill:#344054}
+
+/* V7 mobile + pronunciation */
+button,.subject,.mode,.choice,.unitbtn,.cat,.speakbtn{
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(22,93,204,.14);
+}
+button{min-height:44px}
+.subject,.mode{width:100%;color:inherit;font-family:inherit}
+.subject{border:1px solid var(--line);text-align:left}
+.subject:active,.mode:active,.choice:active,.btn:active{transform:scale(.99)}
+.subjectcta{display:inline-flex;align-items:center;justify-content:center;margin-top:12px}
+.choiceRow{display:flex;gap:8px;align-items:stretch;min-width:0}
+.choiceRow .choice{flex:1;min-width:0}
+.speakbtn{flex:0 0 48px;border:1px solid #cbd7eb;background:#f3f7ff;border-radius:12px;cursor:pointer;font-size:19px;color:#184b9b}
+.speakbtn:active{background:#e3edff}
+.pronounceLine{display:flex;justify-content:center;margin-top:8px}
+.selftrain{margin-top:16px;padding:15px;border:1px solid #cfd9ea;border-radius:14px;background:#f8fbff}
+.selftrain h3{margin-bottom:5px}
+.selfstats{font-size:13px;color:var(--muted);margin:8px 0 12px}
+.morphtip{margin-top:7px;padding-top:7px;border-top:1px dashed #d7b75c}
+.mobileNote{display:none}
+#appError{display:none;margin:12px 0;padding:12px 14px;border:1px solid #f1a9a5;border-radius:12px;background:#fff0ef;color:#9d1c18;line-height:1.55}
+@media(max-width:800px){
+  .wrap{padding:8px}
+  .hero{border-radius:15px}
+  .card{padding:14px;border-radius:14px}
+  .topnav{gap:6px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .topnav button{flex:0 0 auto;padding:9px 11px}
+  .choice,.mode,.cat,.unitbtn{font-size:16px}
+  .choices{gap:9px}
+  .choiceRow{width:100%}
+  .question{margin-top:18px;word-break:break-word}
+  .answerinput{font-size:16px}
+  .mobileNote{display:block}
+}
+
+</style>
+</head><body><div class="wrap">
+<section class="hero"><h1>台積電技術員｜英文＋數學模擬訓練 V8</h1><p>今天只練一科：先選英文或數學。兩科的練習、錯題、模擬考完全分開。</p><p class="tiny">英文題庫依台積電公開常用英文 288 單字；正式進度只計英翻中／中翻英，拼字為自我加強；數學依公開面試經驗常見題型製作原創模擬題。非台積電官方測驗。</p></section>
+<div id="appError"></div>
+<nav class="topnav" id="nav"><button data-page="home" class="active">首頁選科</button><button class="engNav" data-page="engDash" style="display:none">英文總覽</button><button class="engNav" data-page="engStudy" style="display:none">英文學習</button><button class="engNav" data-page="engUnits" style="display:none">分組背誦</button><button class="engNav" data-page="engWords" style="display:none">288 單字</button><button class="engNav" data-page="engExam" style="display:none">英文模擬考</button><button class="mathNav" data-page="mathDash" style="display:none">數學總覽</button><button class="mathNav" data-page="mathStudy" style="display:none">數學練習</button><button class="mathNav" data-page="mathExam" style="display:none">數學模擬考</button></nav>
+<main>
+<section id="home" class="page active"><div class="subjectgrid"><button type="button" class="subject eng" onclick="enterSubject('eng')"><span><span class="icon">🔤</span><h2>今天學英文</h2><p>288 單字、英翻中、中翻英、錯題記憶法、智慧複習、自我加強拼字。</p></span><span class="btn primary subjectcta">進入英文訓練</span></button><button type="button" class="subject math" onclick="enterSubject('math')"><span><span class="icon">➗</span><h2>今天學數學</h2><p>產能、不良率／良率、時差、速度距離、平均、座標、圖表與基本計算。</p></span><span class="btn mathbtn subjectcta">進入數學訓練</span></button></div><div class="card" style="margin-top:16px"><h2>擬真模式怎麼設計？</h2><div class="note">公開面試分享顯示考試版本會隨時間／職缺而不同。新版以較近期回報的「英文約 20 題、數學約 7 題」作為擬真題數；因你要求兩科分開，本站將計時也拆科，因此單科時間只是訓練用壓力設定，不宣稱是官方時間。</div></div></section>
+
+<section id="engDash" class="page"><div class="grid"><div class="card span8"><h2>英文 288 單字進度</h2><div class="statrow"><div class="stat"><b id="mastered">0</b><span>已掌握</span></div><div class="stat"><b id="learning">0</b><span>學習中</span></div><div class="stat"><b id="unseen">288</b><span>尚未學</span></div><div class="stat"><b id="accuracy">0%</b><span>累積正確率</span></div></div><div style="margin-top:14px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><b>掌握度</b><span id="masterPct">0%</span></div><div class="progress"><div id="masterBar"></div></div></div><div id="readyMsg" class="note" style="margin-top:14px"></div></div><div class="card span4"><h2>今天英文建議</h2><div id="todayPlan" style="line-height:1.8"></div><div class="actions" style="margin-top:12px"><button class="btn primary" onclick="startSmart()">開始智慧複習</button></div></div><div class="card span7"><h2>熟練等級</h2><div class="levels" id="levelStats"></div><p class="tiny">同一字的英→中與中→英都反覆答對，才會真正升級。</p></div><div class="card span5"><h2>考前模式</h2><p>模擬近期常見的 20 題選擇題節奏，中翻英／英翻中混合；可選「純 288」或加入少量題庫外常見字。</p><button class="btn primary" onclick="showPage('engExam')">英文實戰模擬</button></div></div></section>
+
+<section id="engStudy" class="page"><div class="card studybox">
+<div id="studySetup">
+  <h2>英文學習</h2>
+  <div class="modegrid">
+    <button type="button" class="mode" onclick="startSmart()"><b>智慧複習</b><span class="tiny">弱項＋到期＋新字，自動安排；只考英翻中／中翻英。</span></button>
+    <button type="button" class="mode" onclick="startEngMode('en2zh',25)"><b>英文 → 中文</b><span class="tiny">看到英文選中文。</span></button>
+    <button type="button" class="mode" onclick="startEngMode('zh2en',25)"><b>中文 → 英文</b><span class="tiny">看到中文選英文；英文選項可按 🔊 發音。</span></button>
+    <button type="button" class="mode" onclick="startWeak()"><b>錯題／弱項特訓</b><span class="tiny">答錯會回鍋，並顯示記憶法＋字首／字根／字尾技巧。</span></button>
+  </div>
+
+  <div class="selftrain">
+    <h3>✍️ 自我加強｜拼字</h3>
+    <div class="tiny">只用來加強記憶，<b>不列入熟練度、不進智慧複習、不進英文模擬考</b>。</div>
+    <div class="selfstats" id="spellingStats">尚未練習拼字</div>
+    <div class="actions">
+      <button type="button" class="btn primary" onclick="startSpelling(20,false)">拼字 20 題</button>
+      <button type="button" class="btn ghost" onclick="startSpelling(20,true)">拼字弱項 20 題</button>
+    </div>
+  </div>
+  <div class="note mobileNote" style="margin-top:14px">📱 手機版已改為觸控優先按鈕。若用 LINE／Facebook 內建瀏覽器遇到限制，建議用 Safari 或 Chrome 開啟網址。</div>
+</div>
+
+<div id="studyRun" style="display:none">
+  <div class="studytop">
+    <div><span class="pill" id="studyCounter"></span> <span class="pill" id="studyModeLabel"></span></div>
+    <div class="actions"><button type="button" class="btn ghost" onclick="speakCurrent()">🔊 發音</button><button type="button" class="btn ghost" onclick="endStudy(true)">結束</button></div>
+  </div>
+  <div class="progress" style="margin-top:14px"><div id="studyBar"></div></div>
+  <div class="question" id="studyQuestion"></div>
+  <div class="pronounceLine"><button type="button" id="studyPronounce" class="speakbtn" onclick="speakCurrent()" style="display:none" aria-label="播放英文發音">🔊</button></div>
+  <div class="subq" id="studySub"></div>
+  <div id="studyAnswer"></div>
+  <div id="studyFeedback" class="feedback"></div>
+  <div class="actions" style="justify-content:center;margin-top:15px">
+    <button type="button" id="studySubmit" class="btn primary" onclick="submitStudy()" style="display:none">送出答案</button>
+    <button type="button" id="studyNext" class="btn secondary" onclick="nextStudy()" style="display:none">下一題</button>
+  </div>
+</div>
+
+<div id="studyDone" style="display:none;text-align:center">
+  <h2>這回合完成</h2>
+  <div style="font-size:50px;font-weight:900;color:var(--blue)" id="roundScore"></div>
+  <p id="roundDetail"></p>
+  <div class="actions" style="justify-content:center">
+    <button type="button" class="btn primary" onclick="startSmart()">繼續智慧複習</button>
+    <button type="button" class="btn secondary" onclick="startWeak()">練弱項</button>
+    <button type="button" class="btn ghost" onclick="resetStudyUI()">回選單</button>
+  </div>
+</div>
+</div></section>
+
+<section id="engUnits" class="page"><div class="grid"><div class="card span12"><h2>12 組 × 24 字</h2><div class="unitgrid" id="unitGrid"></div></div><div class="card span12" id="flashCardWrap" style="display:none"><div class="studytop"><h2 id="flashTitle"></h2><button class="btn ghost" onclick="closeFlash()">關閉</button></div><div class="flash" id="flashCard" onclick="flipCard()"><div class="en" id="flashEn"></div><div class="zh" id="flashZh" style="display:none"></div><div class="hint">點卡片翻面</div></div><div class="actions" style="justify-content:center;margin-top:12px"><button class="btn ghost" onclick="prevFlash()">上一張</button><span id="flashCount" class="pill"></span><button class="btn ghost" onclick="nextFlash()">下一張</button><button class="btn primary" onclick="quizCurrentUnit()">測驗這一組</button></div></div></div></section>
+
+<section id="engWords" class="page"><div class="card"><h2>完整 288 單字表</h2><div class="searchbar"><input id="wordSearch" placeholder="搜尋英文或中文…" oninput="renderWords()"><select id="wordLevelFilter" onchange="renderWords()"><option value="all">全部熟練度</option><option value="0">0 未學</option><option value="1">1 初見</option><option value="2">2 認得</option><option value="3">3 熟悉</option><option value="4">4 穩定</option><option value="5">5 已掌握</option></select><select id="wordUnitFilter" onchange="renderWords()"><option value="all">全部組別</option></select></div><div class="tablewrap"><table><thead><tr><th>#</th><th>英文</th><th>詞性</th><th>中文</th><th>熟練</th><th>錯誤</th><th></th></tr></thead><tbody id="wordBody"></tbody></table></div></div></section>
+
+<section id="engExam" class="page"><div class="grid"><div class="card span5" id="engExamSetup"><h2>英文｜近期風格擬真模擬</h2><p class="tiny">預設 20 題，中翻英／英翻中選擇題。完成前不顯示答案。</p><div class="form"><label>題目來源</label><select id="engExamSource"><option value="realistic">擬真：18 題 288 單字＋2 題延伸常見字</option><option value="official">純 288 單字</option></select><label>計時</label><select id="engExamTime"><option value="900">15 分鐘（拆科壓力模式）</option><option value="600">10 分鐘（高壓）</option><option value="0">不限時</option></select></div><div class="note" style="margin-top:12px">15 分鐘是將近期「英數合計約 20 分鐘」按題量粗略拆科後的訓練設定，不是官方單科時間。</div><div class="actions" style="margin-top:14px"><button class="btn primary" onclick="startEngExam()">開始 20 題模擬</button></div></div><div class="card span7"><h2>英文考試準備度</h2><div id="engExamReadiness"></div></div><div class="card span12" id="engExamRun" style="display:none"><div class="studytop"><div><span class="pill" id="engExamCounter"></span> <span class="pill timerBig" id="engExamTimer"></span></div><button class="btn ghost" onclick="quitEngExam()">退出</button></div><div class="progress" style="margin-top:14px"><div id="engExamBar"></div></div><div class="question" id="engExamQuestion"></div><div class="subq" id="engExamSub"></div><div class="choices" id="engExamChoices"></div><div class="actions" style="justify-content:center;margin-top:14px"><button class="btn primary" onclick="nextEngExam()">下一題</button></div></div><div class="card span12" id="engExamDone" style="display:none"><h2>英文模擬結果</h2><div style="font-size:54px;font-weight:900;color:var(--blue)" id="engExamScore"></div><div id="engExamSummary"></div><div id="engExamReview" style="margin-top:15px"></div></div></div></section>
+
+<section id="mathDash" class="page"><div class="grid"><div class="card span7"><h2>數學訓練進度</h2><div class="statrow"><div class="stat"><b id="mathAnswered">0</b><span>累積作答</span></div><div class="stat"><b id="mathAcc">0%</b><span>正確率</span></div><div class="stat"><b id="mathSessions">0</b><span>練習回合</span></div><div class="stat"><b id="mathBest">0%</b><span>模擬最佳</span></div></div><div id="mathAdvice" class="note" style="margin-top:14px"></div></div><div class="card span5"><h2>近期常見數學方向</h2><p class="tiny">依公開面試經驗整理，不是官方題綱。</p><div id="mathCatStats"></div></div><div class="card span12"><h2>今天怎麼練？</h2><div class="modegrid"><button type="button" class="mode" onclick="startMathPractice('mixed',10)"><b>10 題綜合練習</b><span class="tiny">每題立即看完整算式。</span></button><button type="button" class="mode" onclick="startMathWeak()"><b>弱項複習</b><span class="tiny">優先抽你錯最多的題型。</span></button><button type="button" class="mode" onclick="showPage('mathStudy')"><b>依題型練習</b><span class="tiny">產能、反推百分比、跨日時差、追趕、座標圖等分開練。</span></button><button type="button" class="mode" onclick="showPage('mathExam')"><b>7 題擬真模擬</b><span class="tiny">不立即公布答案，最後一次檢討。</span></button></div></div></div></section>
+
+<section id="mathStudy" class="page"><div class="card studybox"><div id="mathSetup"><h2>數學練習</h2><p class="tiny">題目會隨機換數字。請盡量自己寫算式；送出後才看解法。</p><div class="catgrid" id="mathCatGrid"></div><div class="actions" style="margin-top:12px"><button class="btn mathbtn" onclick="startMathPractice('mixed',10)">綜合 10 題</button><button class="btn ghost" onclick="startMathPractice('mixed',20)">綜合 20 題</button></div></div><div id="mathRun" style="display:none"><div class="studytop"><div><span class="pill mathpill" id="mathCounter"></span> <span class="pill mathpill" id="mathCatLabel"></span></div><button class="btn ghost" onclick="endMathPractice(true)">結束</button></div><div class="progress" style="margin-top:14px"><div id="mathBar" style="background:var(--purple)"></div></div><div class="question" id="mathQuestion"></div><div id="mathVisual" class="mathvisual"></div><div class="subq" id="mathHint"></div><input id="mathAnswer" class="answerinput" placeholder="輸入答案（只輸入數字或指定格式）" onkeydown="if(event.key==='Enter')submitMathAnswer()"><textarea id="mathScratch" class="scratch" placeholder="算式草稿（不計分，可自己列計算過程）"></textarea><div class="actions" style="justify-content:center;margin-top:14px"><button id="mathSubmit" class="btn mathbtn" onclick="submitMathAnswer()">送出答案</button><button id="mathNext" class="btn secondary" onclick="nextMathQuestion()" style="display:none">下一題</button></div><div id="mathFeedback" class="feedback"></div></div><div id="mathDone" style="display:none;text-align:center"><h2>數學練習完成</h2><div style="font-size:50px;font-weight:900;color:var(--purple)" id="mathRoundScore"></div><p id="mathRoundDetail"></p><div class="actions" style="justify-content:center"><button class="btn mathbtn" onclick="startMathWeak()">練弱項</button><button class="btn ghost" onclick="resetMathUI()">回題型選單</button></div></div></div></section>
+
+<section id="mathExam" class="page"><div class="grid"><div class="card span5" id="mathExamSetup"><h2>數學｜近期風格擬真模擬（無提示）</h2><p>7 題核心題型各 1 題：產能、百分比／良率反推、跨日＋時差、相向／同向速度、平均數反推、座標圖、表格／折線圖判讀。</p><div class="form"><label>計時</label><select id="mathExamTime"><option value="300">5 分鐘（拆科高壓模式）</option><option value="600">10 分鐘（一般練習）</option><option value="0">不限時</option></select></div><div class="note" style="margin-top:12px">模擬考作答中不提供任何提示；近期公開回報常提到需寫計算過程。網頁只判答案，完成整份後才提供完整解法。</div><div class="actions" style="margin-top:14px"><button class="btn mathbtn" onclick="startMathExam()">開始 7 題模擬</button></div></div><div class="card span7"><h2>數學準備度</h2><div id="mathReadiness"></div></div><div class="card span12" id="mathExamRun" style="display:none"><div class="studytop"><div><span class="pill mathpill" id="mathExamCounter"></span> <span class="pill mathpill timerBig" id="mathExamTimer"></span></div><button class="btn ghost" onclick="quitMathExam()">退出</button></div><div class="progress" style="margin-top:14px"><div id="mathExamBar" style="background:var(--purple)"></div></div><div class="question" id="mathExamQuestion"></div><div id="mathExamVisual" class="mathvisual"></div><div class="subq" id="mathExamHint" style="display:none"></div><input id="mathExamAnswer" class="answerinput" placeholder="輸入答案" onkeydown="if(event.key==='Enter')nextMathExam()"><textarea id="mathExamScratch" class="scratch" placeholder="算式草稿（不計分）"></textarea><div class="actions" style="justify-content:center;margin-top:14px"><button class="btn mathbtn" onclick="nextMathExam()">下一題</button></div></div><div class="card span12" id="mathExamDone" style="display:none"><h2>數學模擬結果</h2><div style="font-size:54px;font-weight:900;color:var(--purple)" id="mathExamScore"></div><div id="mathExamSummary"></div><div id="mathExamReview" style="margin-top:15px"></div></div></div></section>
+</main><div class="footer">所有進度只存在這台裝置的瀏覽器。英文與數學各自記錄，不會混在一起。<br>V8 數學模擬固定涵蓋 7 個核心題型；座標圖不顯示未知點答案，模擬作答中不顯示提示；題目為依公開面試經驗方向製作的原創模擬題，實際測驗仍可能因日期、廠區、職缺而不同。</div></div>
+<script>
+const WORDS=[{"id": 1, "en": "ability", "pos": "n.", "zh": "能力"}, {"id": 2, "en": "abnormal", "pos": "a.", "zh": "異常的"}, {"id": 3, "en": "abort", "pos": "v.", "zh": "中止"}, {"id": 4, "en": "absence", "pos": "n.", "zh": "缺席"}, {"id": 5, "en": "acid", "pos": "n.", "zh": "酸"}, {"id": 6, "en": "active", "pos": "a.", "zh": "主動的"}, {"id": 7, "en": "actual", "pos": "a.", "zh": "真實的"}, {"id": 8, "en": "add", "pos": "v.", "zh": "增加"}, {"id": 9, "en": "adjust", "pos": "v.", "zh": "調整"}, {"id": 10, "en": "AI", "pos": "n.", "zh": "人工智慧"}, {"id": 11, "en": "air shower", "pos": "n.", "zh": "潔淨通道"}, {"id": 12, "en": "alarm", "pos": "n.", "zh": "警報"}, {"id": 13, "en": "alert", "pos": "n.", "zh": "警報"}, {"id": 14, "en": "align", "pos": "v.", "zh": "對焦"}, {"id": 15, "en": "annually", "pos": "a.", "zh": "每年的"}, {"id": 16, "en": "area", "pos": "n.", "zh": "區域"}, {"id": 17, "en": "attach", "pos": "v.", "zh": "附上"}, {"id": 18, "en": "audit", "pos": "v.", "zh": "稽核、查核"}, {"id": 19, "en": "automatic", "pos": "a.", "zh": "自動的"}, {"id": 20, "en": "automotive", "pos": "adj.", "zh": "汽車的"}, {"id": 21, "en": "available", "pos": "a.", "zh": "可使用的"}, {"id": 22, "en": "average", "pos": "n.", "zh": "平均"}, {"id": 23, "en": "backup", "pos": "n.", "zh": "支援"}, {"id": 24, "en": "bank", "pos": "n./v.", "zh": "銀行；暫存"}, {"id": 25, "en": "basic", "pos": "a.", "zh": "基礎的"}, {"id": 26, "en": "beam", "pos": "n.", "zh": "光束"}, {"id": 27, "en": "benchmark", "pos": "n.", "zh": "標竿學習"}, {"id": 28, "en": "bottle", "pos": "n.", "zh": "瓶子"}, {"id": 29, "en": "bottom", "pos": "n.", "zh": "底部"}, {"id": 30, "en": "broken", "pos": "a.", "zh": "破掉的"}, {"id": 31, "en": "cancel", "pos": "v.", "zh": "取消"}, {"id": 32, "en": "card", "pos": "n.", "zh": "卡片"}, {"id": 33, "en": "cart", "pos": "n.", "zh": "手推車"}, {"id": 34, "en": "cassette", "pos": "n.", "zh": "晶片專用盒"}, {"id": 35, "en": "center", "pos": "n.", "zh": "中心"}, {"id": 36, "en": "certify", "pos": "v.", "zh": "證實、認證"}, {"id": 37, "en": "change", "pos": "v.", "zh": "更換"}, {"id": 38, "en": "chart", "pos": "n.", "zh": "圖表"}, {"id": 39, "en": "check", "pos": "v.", "zh": "檢查"}, {"id": 40, "en": "chemical", "pos": "n.", "zh": "化學、化學品"}, {"id": 41, "en": "chip", "pos": "n.", "zh": "晶片"}, {"id": 42, "en": "choose", "pos": "v.", "zh": "挑選"}, {"id": 43, "en": "clean", "pos": "v.", "zh": "清潔"}, {"id": 44, "en": "clean chamber", "pos": "n.", "zh": "潔淨室"}, {"id": 45, "en": "clear", "pos": "v.", "zh": "清除"}, {"id": 46, "en": "collect", "pos": "v.", "zh": "蒐集"}, {"id": 47, "en": "color", "pos": "n.", "zh": "顏色"}, {"id": 48, "en": "comment", "pos": "n.", "zh": "評論"}, {"id": 49, "en": "company", "pos": "n.", "zh": "公司"}, {"id": 50, "en": "complete", "pos": "v.", "zh": "完成"}, {"id": 51, "en": "computer", "pos": "n.", "zh": "電腦"}, {"id": 52, "en": "concern", "pos": "v.", "zh": "擔憂"}, {"id": 53, "en": "confidential", "pos": "a.", "zh": "機密的"}, {"id": 54, "en": "confirm", "pos": "v.", "zh": "確認"}, {"id": 55, "en": "contamination", "pos": "n.", "zh": "污染"}, {"id": 56, "en": "continue", "pos": "v.", "zh": "繼續"}, {"id": 57, "en": "control", "pos": "n.", "zh": "控制"}, {"id": 58, "en": "copy", "pos": "n.", "zh": "拷貝"}, {"id": 59, "en": "count", "pos": "v.", "zh": "計算"}, {"id": 60, "en": "customer", "pos": "n.", "zh": "客戶"}, {"id": 61, "en": "cycle", "pos": "n.", "zh": "週期"}, {"id": 62, "en": "cycle time", "pos": "n.", "zh": "生產週期"}, {"id": 63, "en": "daily", "pos": "a.", "zh": "每日的"}, {"id": 64, "en": "data", "pos": "n.", "zh": "資料"}, {"id": 65, "en": "date", "pos": "n.", "zh": "日期"}, {"id": 66, "en": "decline", "pos": "v.", "zh": "減少"}, {"id": 67, "en": "defect", "pos": "n.", "zh": "缺陷"}, {"id": 68, "en": "delay", "pos": "v.", "zh": "延遲"}, {"id": 69, "en": "delete", "pos": "v.", "zh": "刪除"}, {"id": 70, "en": "diffusion", "pos": "n.", "zh": "擴散製程"}, {"id": 71, "en": "document", "pos": "n.", "zh": "文件"}, {"id": 72, "en": "dry", "pos": "a.", "zh": "乾的"}, {"id": 73, "en": "emergency", "pos": "n.", "zh": "緊急情況"}, {"id": 74, "en": "emergency stop", "pos": "n.", "zh": "緊急停止"}, {"id": 75, "en": "engineer", "pos": "n.", "zh": "工程師"}, {"id": 76, "en": "enhance", "pos": "v.", "zh": "增進"}, {"id": 77, "en": "enter", "pos": "v.", "zh": "進入"}, {"id": 78, "en": "environment", "pos": "n.", "zh": "環境"}, {"id": 79, "en": "equipment", "pos": "n.", "zh": "設備"}, {"id": 80, "en": "error", "pos": "n.", "zh": "錯誤"}, {"id": 81, "en": "etching", "pos": "n.", "zh": "蝕刻製程"}, {"id": 82, "en": "EUV / extreme ultraviolet", "pos": "n.", "zh": "極紫外光"}, {"id": 83, "en": "event", "pos": "n.", "zh": "事件"}, {"id": 84, "en": "execute", "pos": "v.", "zh": "執行"}, {"id": 85, "en": "exit", "pos": "n.", "zh": "退出"}, {"id": 86, "en": "fault", "pos": "n.", "zh": "錯誤"}, {"id": 87, "en": "find", "pos": "v.", "zh": "發現"}, {"id": 88, "en": "floor", "pos": "n.", "zh": "地板"}, {"id": 89, "en": "focus", "pos": "n.", "zh": "焦點"}, {"id": 90, "en": "follow", "pos": "v.", "zh": "照做、跟隨"}, {"id": 91, "en": "freeze", "pos": "v.", "zh": "凍結"}, {"id": 92, "en": "full", "pos": "a.", "zh": "滿的"}, {"id": 93, "en": "function", "pos": "n.", "zh": "功能"}, {"id": 94, "en": "gas", "pos": "n.", "zh": "氣體"}, {"id": 95, "en": "glass", "pos": "n.", "zh": "玻璃、鏡片"}, {"id": 96, "en": "gloves", "pos": "n.", "zh": "手套"}, {"id": 97, "en": "grade", "pos": "n.", "zh": "等級"}, {"id": 98, "en": "green", "pos": "n.", "zh": "綠色"}, {"id": 99, "en": "group", "pos": "n.", "zh": "群組"}, {"id": 100, "en": "handle", "pos": "v.", "zh": "處理"}, {"id": 101, "en": "hard-disk", "pos": "n.", "zh": "硬盤"}, {"id": 102, "en": "heavy", "pos": "a.", "zh": "重的"}, {"id": 103, "en": "helmet", "pos": "n.", "zh": "安全帽"}, {"id": 104, "en": "help", "pos": "v.", "zh": "幫助"}, {"id": 105, "en": "hold", "pos": "v.", "zh": "暫停"}, {"id": 106, "en": "hole", "pos": "n.", "zh": "孔、洞"}, {"id": 107, "en": "hot", "pos": "a.", "zh": "熱的"}, {"id": 108, "en": "impact", "pos": "n.", "zh": "影響"}, {"id": 109, "en": "improve", "pos": "v.", "zh": "改善"}, {"id": 110, "en": "inform", "pos": "v.", "zh": "通知"}, {"id": 111, "en": "information", "pos": "n.", "zh": "資訊"}, {"id": 112, "en": "inhibition", "pos": "n.", "zh": "禁止禁用"}, {"id": 113, "en": "input", "pos": "n.", "zh": "輸入"}, {"id": 114, "en": "inspect", "pos": "v.", "zh": "檢查"}, {"id": 115, "en": "inspection", "pos": "n.", "zh": "檢驗"}, {"id": 116, "en": "instruction", "pos": "n.", "zh": "指令"}, {"id": 117, "en": "internet", "pos": "n.", "zh": "網際網路"}, {"id": 118, "en": "interview", "pos": "n.", "zh": "面試"}, {"id": 119, "en": "issue", "pos": "v./n.", "zh": "發行；議題"}, {"id": 120, "en": "job", "pos": "n.", "zh": "工作"}, {"id": 121, "en": "keep", "pos": "v.", "zh": "保持"}, {"id": 122, "en": "keyboard", "pos": "n.", "zh": "鍵盤"}, {"id": 123, "en": "label", "pos": "n.", "zh": "標籤"}, {"id": 124, "en": "laboratory", "pos": "n.", "zh": "實驗室"}, {"id": 125, "en": "leader", "pos": "n.", "zh": "組長"}, {"id": 126, "en": "learn", "pos": "v.", "zh": "學習"}, {"id": 127, "en": "level", "pos": "n.", "zh": "程度"}, {"id": 128, "en": "lift", "pos": "v.", "zh": "抬起、舉起"}, {"id": 129, "en": "light", "pos": "n.", "zh": "光"}, {"id": 130, "en": "line", "pos": "n.", "zh": "直線"}, {"id": 131, "en": "link", "pos": "n.", "zh": "連結"}, {"id": 132, "en": "liquid", "pos": "n.", "zh": "液體"}, {"id": 133, "en": "list", "pos": "n.", "zh": "清單"}, {"id": 134, "en": "lithography", "pos": "n.", "zh": "黃光／微影製程"}, {"id": 135, "en": "load", "pos": "v.", "zh": "上貨、裝載"}, {"id": 136, "en": "loading", "pos": "n.", "zh": "負荷"}, {"id": 137, "en": "lobby", "pos": "n.", "zh": "大廳"}, {"id": 138, "en": "location", "pos": "n.", "zh": "位置"}, {"id": 139, "en": "lock", "pos": "v.", "zh": "鎖住"}, {"id": 140, "en": "log sheet", "pos": "n.", "zh": "工作紀錄"}, {"id": 141, "en": "lose", "pos": "v.", "zh": "遺失"}, {"id": 142, "en": "lot", "pos": "n.", "zh": "批貨"}, {"id": 143, "en": "machine", "pos": "n.", "zh": "機器"}, {"id": 144, "en": "maintain", "pos": "v.", "zh": "維護"}, {"id": 145, "en": "manual", "pos": "a.", "zh": "手動的"}, {"id": 146, "en": "manufacture", "pos": "v.", "zh": "製造"}, {"id": 147, "en": "mark", "pos": "n.", "zh": "記號"}, {"id": 148, "en": "mask", "pos": "n.", "zh": "光罩、口罩"}, {"id": 149, "en": "material", "pos": "n.", "zh": "原料"}, {"id": 150, "en": "measure", "pos": "v.", "zh": "量測"}, {"id": 151, "en": "mechanical", "pos": "a.", "zh": "機械的"}, {"id": 152, "en": "merge", "pos": "v.", "zh": "合併"}, {"id": 153, "en": "message", "pos": "n.", "zh": "訊息"}, {"id": 154, "en": "metal", "pos": "n.", "zh": "金屬"}, {"id": 155, "en": "miss-operation", "pos": "n.", "zh": "錯誤動作"}, {"id": 156, "en": "monitor", "pos": "n.", "zh": "監視器、測機"}, {"id": 157, "en": "monthly", "pos": "a.", "zh": "每月的"}, {"id": 158, "en": "more", "pos": "a.", "zh": "更多的"}, {"id": 159, "en": "move", "pos": "v./n.", "zh": "移動；產出"}, {"id": 160, "en": "new", "pos": "a.", "zh": "新的"}, {"id": 161, "en": "normal", "pos": "a.", "zh": "正常的"}, {"id": 162, "en": "note", "pos": "n.", "zh": "註解"}, {"id": 163, "en": "notice", "pos": "n.", "zh": "通知"}, {"id": 164, "en": "number", "pos": "n.", "zh": "號碼"}, {"id": 165, "en": "office", "pos": "n.", "zh": "辦公室"}, {"id": 166, "en": "off-line", "pos": "a.", "zh": "離線的"}, {"id": 167, "en": "on time", "pos": "ph.", "zh": "準時"}, {"id": 168, "en": "on-line", "pos": "a.", "zh": "在線的"}, {"id": 169, "en": "operation", "pos": "n.", "zh": "操作"}, {"id": 170, "en": "output", "pos": "n.", "zh": "輸出"}, {"id": 171, "en": "oven", "pos": "n.", "zh": "烤箱"}, {"id": 172, "en": "over time", "pos": "ph.", "zh": "加班"}, {"id": 173, "en": "page", "pos": "n.", "zh": "頁數"}, {"id": 174, "en": "paper", "pos": "n.", "zh": "紙張"}, {"id": 175, "en": "parameter", "pos": "n.", "zh": "參數"}, {"id": 176, "en": "part", "pos": "n.", "zh": "零件"}, {"id": 177, "en": "particle", "pos": "n.", "zh": "微粒"}, {"id": 178, "en": "pass", "pos": "v.", "zh": "合格"}, {"id": 179, "en": "password", "pos": "n.", "zh": "密碼"}, {"id": 180, "en": "perfect", "pos": "a.", "zh": "完美的"}, {"id": 181, "en": "personal", "pos": "a.", "zh": "個人的"}, {"id": 182, "en": "phase", "pos": "n.", "zh": "階段"}, {"id": 183, "en": "photo", "pos": "n.", "zh": "相片"}, {"id": 184, "en": "plan", "pos": "n.", "zh": "計劃"}, {"id": 185, "en": "plus", "pos": "prep.", "zh": "加上"}, {"id": 186, "en": "pod", "pos": "n.", "zh": "晶片傳送盒"}, {"id": 187, "en": "point", "pos": "n.", "zh": "點"}, {"id": 188, "en": "position", "pos": "n.", "zh": "位置"}, {"id": 189, "en": "positive", "pos": "a.", "zh": "正向的"}, {"id": 190, "en": "postpone", "pos": "v.", "zh": "延期"}, {"id": 191, "en": "power", "pos": "n.", "zh": "力量"}, {"id": 192, "en": "practice", "pos": "v.", "zh": "練習"}, {"id": 193, "en": "prepare", "pos": "v.", "zh": "準備"}, {"id": 194, "en": "press", "pos": "v.", "zh": "按下"}, {"id": 195, "en": "pressure", "pos": "n.", "zh": "壓力"}, {"id": 196, "en": "preview", "pos": "n.", "zh": "預覽"}, {"id": 197, "en": "price", "pos": "n.", "zh": "價格"}, {"id": 198, "en": "print", "pos": "n.", "zh": "列印"}, {"id": 199, "en": "priority", "pos": "n.", "zh": "優先順序"}, {"id": 200, "en": "process", "pos": "n.", "zh": "過程、流程"}, {"id": 201, "en": "product", "pos": "n.", "zh": "產品"}, {"id": 202, "en": "protect", "pos": "v.", "zh": "保護"}, {"id": 203, "en": "purge", "pos": "v.", "zh": "清除"}, {"id": 204, "en": "push", "pos": "v.", "zh": "推進"}, {"id": 205, "en": "quality", "pos": "n.", "zh": "品質"}, {"id": 206, "en": "quantity", "pos": "n.", "zh": "數量"}, {"id": 207, "en": "rate", "pos": "n.", "zh": "比率"}, {"id": 208, "en": "re-certify", "pos": "v.", "zh": "重新認證"}, {"id": 209, "en": "recipe", "pos": "n.", "zh": "食譜、處方程式"}, {"id": 210, "en": "record", "pos": "n.", "zh": "記錄"}, {"id": 211, "en": "recover", "pos": "v.", "zh": "復機"}, {"id": 212, "en": "release", "pos": "v.", "zh": "釋放"}, {"id": 213, "en": "remark", "pos": "n.", "zh": "註記"}, {"id": 214, "en": "remind", "pos": "v.", "zh": "提醒"}, {"id": 215, "en": "remove", "pos": "v.", "zh": "移開"}, {"id": 216, "en": "repair", "pos": "v.", "zh": "修理"}, {"id": 217, "en": "report", "pos": "n.", "zh": "報告"}, {"id": 218, "en": "reset", "pos": "v.", "zh": "重設"}, {"id": 219, "en": "rework", "pos": "v.", "zh": "重做"}, {"id": 220, "en": "route", "pos": "n.", "zh": "路線"}, {"id": 221, "en": "rule", "pos": "n.", "zh": "規則"}, {"id": 222, "en": "run", "pos": "v.", "zh": "運轉、跑"}, {"id": 223, "en": "run-card", "pos": "n.", "zh": "流程卡"}, {"id": 224, "en": "S.O.P / Standard Operating Procedures", "pos": "n.", "zh": "標準作業程序"}, {"id": 225, "en": "safe", "pos": "a.", "zh": "安全的"}, {"id": 226, "en": "same", "pos": "a.", "zh": "相同的"}, {"id": 227, "en": "save", "pos": "v.", "zh": "儲存"}, {"id": 228, "en": "scrap", "pos": "n.", "zh": "報廢"}, {"id": 229, "en": "scratch", "pos": "v.", "zh": "刮傷"}, {"id": 230, "en": "screen", "pos": "n.", "zh": "螢幕"}, {"id": 231, "en": "select", "pos": "v.", "zh": "選擇"}, {"id": 232, "en": "semiconductor", "pos": "n.", "zh": "半導體"}, {"id": 233, "en": "service", "pos": "n.", "zh": "服務"}, {"id": 234, "en": "sheet", "pos": "n.", "zh": "表單"}, {"id": 235, "en": "shift", "pos": "n.", "zh": "班次"}, {"id": 236, "en": "show", "pos": "v.", "zh": "顯示"}, {"id": 237, "en": "shuttle", "pos": "n.", "zh": "接駁車"}, {"id": 238, "en": "skip", "pos": "v.", "zh": "跳過"}, {"id": 239, "en": "sorter", "pos": "n.", "zh": "排序機、分類機"}, {"id": 240, "en": "source", "pos": "n.", "zh": "來源"}, {"id": 241, "en": "Spec. / specification", "pos": "n.", "zh": "規格"}, {"id": 242, "en": "speed", "pos": "n.", "zh": "速度"}, {"id": 243, "en": "split", "pos": "n.", "zh": "分帳、分批"}, {"id": 244, "en": "stage", "pos": "n.", "zh": "站別、階段"}, {"id": 245, "en": "standard", "pos": "n.", "zh": "標準"}, {"id": 246, "en": "standby", "pos": "n.", "zh": "等待"}, {"id": 247, "en": "start", "pos": "n.", "zh": "啟動"}, {"id": 248, "en": "station", "pos": "n.", "zh": "站"}, {"id": 249, "en": "status", "pos": "n.", "zh": "狀況"}, {"id": 250, "en": "step", "pos": "n.", "zh": "步驟"}, {"id": 251, "en": "stocker", "pos": "n.", "zh": "儲存櫃"}, {"id": 252, "en": "success", "pos": "n.", "zh": "成功"}, {"id": 253, "en": "super", "pos": "a.", "zh": "超級的"}, {"id": 254, "en": "super hot run", "pos": "n.", "zh": "超級急件"}, {"id": 255, "en": "supervisor", "pos": "n.", "zh": "監督者"}, {"id": 256, "en": "support", "pos": "n.", "zh": "支援"}, {"id": 257, "en": "switch", "pos": "n.", "zh": "開關"}, {"id": 258, "en": "system", "pos": "n.", "zh": "系統"}, {"id": 259, "en": "tag", "pos": "n./v.", "zh": "標籤；標註"}, {"id": 260, "en": "take leave", "pos": "ph.", "zh": "請假"}, {"id": 261, "en": "tape", "pos": "n.", "zh": "膠帶"}, {"id": 262, "en": "target", "pos": "n.", "zh": "目標"}, {"id": 263, "en": "technician", "pos": "n.", "zh": "技術員"}, {"id": 264, "en": "telephone", "pos": "n.", "zh": "電話"}, {"id": 265, "en": "temperature", "pos": "n.", "zh": "溫度"}, {"id": 266, "en": "thickness", "pos": "n.", "zh": "厚度"}, {"id": 267, "en": "thin film", "pos": "n.", "zh": "薄膜製程"}, {"id": 268, "en": "time", "pos": "n.", "zh": "時間"}, {"id": 269, "en": "title", "pos": "n.", "zh": "標題"}, {"id": 270, "en": "top", "pos": "n.", "zh": "頂端"}, {"id": 271, "en": "track", "pos": "v.", "zh": "追蹤"}, {"id": 272, "en": "training", "pos": "n.", "zh": "訓練"}, {"id": 273, "en": "trend", "pos": "n.", "zh": "趨勢"}, {"id": 274, "en": "tune", "pos": "v.", "zh": "調整"}, {"id": 275, "en": "turn rate", "pos": "n.", "zh": "週轉率"}, {"id": 276, "en": "unload", "pos": "v.", "zh": "下貨、卸載"}, {"id": 277, "en": "use", "pos": "v.", "zh": "使用"}, {"id": 278, "en": "username", "pos": "n.", "zh": "使用者名稱"}, {"id": 279, "en": "vendor", "pos": "n.", "zh": "廠商"}, {"id": 280, "en": "view", "pos": "v.", "zh": "查看"}, {"id": 281, "en": "wafer", "pos": "n.", "zh": "晶圓"}, {"id": 282, "en": "waiting", "pos": "n.", "zh": "等待"}, {"id": 283, "en": "warning", "pos": "n.", "zh": "警告"}, {"id": 284, "en": "weekly", "pos": "adv.", "zh": "每週地"}, {"id": 285, "en": "wet", "pos": "a.", "zh": "濕的"}, {"id": 286, "en": "window", "pos": "n.", "zh": "視窗"}, {"id": 287, "en": "yield", "pos": "n.", "zh": "良率"}, {"id": 288, "en": "zero", "pos": "n.", "zh": "零"}];
+const MEMORY_TIPS={
+2:"abnormal = ab(偏離) + normal(正常) → 偏離正常，就是『異常的』。",
+3:"abort 常見於電腦／設備的『中止』；看到 abort 就想像按下 Abort 鍵停止程序。",
+10:"AI 是 Artificial Intelligence 的縮寫，直接連結『人工智慧』。",
+11:"air shower = air(空氣) + shower(沖洗)；進潔淨室前用空氣『沖澡』，就是潔淨通道。",
+14:"align 想成『排成一條 line』，把東西排準、對準 → 對焦／校準。",
+19:"automatic 裡有 auto-，看到 auto 就先想到『自動』。",
+23:"backup = back(後面) + up(撐起來)；在後面撐你，就是『支援／備援』。",
+27:"benchmark 可想成『拿一個標準 mark 來比』→ 標竿／基準。",
+34:"cassette 像『卡匣』，半導體現場用來裝晶片／晶圓的專用盒。",
+40:"chemical 看到 chem- 就想到 chemistry 化學 → 化學品。",
+41:"chip 就是電子產品裡的小『晶片』；想像手機裡那顆 chip。",
+44:"clean chamber = clean(乾淨) + chamber(室) → 潔淨室。",
+53:"confidential 想成文件上蓋著 CONFIDENTIAL 大章 → 『機密的』。",
+55:"contamination = contaminate(污染) + -tion(名詞) → 污染。",
+62:"cycle time = cycle(週期) + time(時間) → 生產週期。",
+67:"defect = 產品有缺點／瑕疵 → 缺陷；可和 defective『有缺陷的』一起記。",
+70:"diffusion = diffuse(擴散) + -ion → 『擴散』製程。",
+74:"emergency stop = 緊急 emergency + 停止 stop → 緊急停止。",
+79:"equipment 常和 machine 一起出現；equipment 是整體『設備』。",
+81:"etching 可聯想到把圖案『蝕』進材料表面 → 蝕刻製程。",
+82:"EUV = Extreme UltraViolet，E=Extreme、UV=Ultraviolet → 極紫外光。",
+86:"fault 想成『fault = 錯在這裡』，設備 fault 就是錯誤／故障。",
+96:"gloves 就是戴在手上的『手套』；常用複數 gloves。",
+101:"hard-disk = hard(硬) + disk(磁碟) → 硬碟。",
+103:"helmet 想像工地／廠區頭上戴的 helmet → 安全帽。",
+105:"hold 在設備畫面常代表『先保持住、不往下跑』→ 暫停。",
+112:"inhibition = inhibit(禁止、抑制) + -ion → 禁止／禁用。",
+115:"inspection = inspect(檢查) + -ion → 檢驗。",
+116:"instruction = instruct(指示) + -ion → 指令／說明。",
+119:"issue 在工作上很常是『問題／議題』；看到 issue 先想『有個議題要處理』。",
+123:"label 就是貼在物品上的『標籤』。",
+134:"lithography 是半導體的黃光／微影製程；可記 litho = 圖樣、graphy = 寫／畫。",
+140:"log sheet = log(紀錄) + sheet(表單) → 工作紀錄。",
+142:"lot 在工廠不是『很多』，而是一『批』貨 → 批貨。",
+144:"maintain = 保持在良好狀態 → 維護；maintenance 是維修保養。",
+145:"manual 跟 automatic 相反；manual = 手動的。",
+148:"mask 在半導體可指『光罩』，日常也可指『口罩』。",
+155:"miss-operation = miss(錯、失誤) + operation(操作) → 錯誤動作。",
+166:"off-line = off(離開) + line(線上) → 離線。",
+167:"on time = 在時間點上 → 準時。",
+168:"on-line = on(在線) + line → 在線／線上。",
+169:"operation 來自 operate『操作』，-tion 變名詞 → 操作。",
+172:"over time 在工作情境記成 overtime：超過正常工時 → 加班。",
+175:"parameter 在設備／程式裡就是要設定的『參數』。",
+177:"particle 想像空氣中很小的『粒子／微粒』。",
+186:"pod 想成裝東西的小『艙／盒』；晶圓廠裡是晶片傳送盒。",
+199:"priority = 哪件事要先做的順序 → 優先順序。",
+203:"purge 在設備上常是『把裡面的東西清掉』→ 清除／吹除。",
+208:"re-certify = re-(重新) + certify(認證) → 重新認證。",
+209:"recipe 在廚房是食譜，在機台則像『機台食譜』→ 處方程式。",
+211:"recover = re-(回來) + cover；設備恢復運作 → 復機。",
+219:"rework = re-(再) + work(做) → 重做。",
+223:"run-card = run(流程運轉) + card(卡) → 流程卡。",
+224:"SOP = Standard Operating Procedures，每個字首 S-O-P → 標準作業程序。",
+228:"scrap 想成被丟進廢料區的東西 → 報廢。",
+229:"scratch 想像表面被指甲『刮』出一道痕 → 刮傷。",
+232:"semiconductor = semi(半) + conductor(導體) → 半導體。",
+235:"shift 在工廠常指日班／夜班的『班次』。",
+239:"sorter = sort(分類) + -er(機器／人) → 排序機、分類機。",
+241:"Spec. = specification 的縮寫；工作上說 spec 就是『規格』。",
+243:"split = 分開；在生產情境可記成把一批『分批』。",
+251:"stocker = stock(庫存／儲存) + -er → 儲存櫃。",
+254:"super hot run = super(超級) + hot(很急) + run(批次運轉) → 超級急件。",
+255:"supervisor = supervise(監督) + -or(人) → 監督者／主管。",
+260:"take leave = take(取得) + leave(休假) → 請假。",
+263:"technician = technical 技術 + -ian(人) → 技術員。",
+267:"thin film = thin(薄) + film(膜) → 薄膜製程。",
+271:"track 想像在地圖上一路『追蹤軌跡』→ 追蹤。",
+274:"tune 像調收音機頻率 → 微調、調整。",
+275:"turn rate = turn(週轉) + rate(比率) → 週轉率。",
+276:"unload = un-(反向) + load(裝載) → 卸載／下貨。",
+278:"username = user(使用者) + name(名稱) → 使用者名稱。",
+279:"vendor 在公司／工廠情境就是提供產品或服務的『廠商』。",
+281:"wafer 是半導體最重要的『晶圓』；想像圓圓薄薄像 wafer 餅。",
+283:"warning = warn(警告) + -ing → 警告。",
+287:"yield 在半導體最重要的意思是『良率』，想成做出來真正良品的比例。"
+};
+const EXTRA_WORDS=[
+{en:"accurate",zh:"準確的"},{en:"require",zh:"需要、要求"},{en:"permission",zh:"許可"},{en:"dangerous",zh:"危險的"},{en:"immediately",zh:"立即"},{en:"procedure",zh:"程序"},{en:"maintenance",zh:"維修、保養"},{en:"protective",zh:"防護的"},{en:"responsible",zh:"負責的"},{en:"safety",zh:"安全"},{en:"schedule",zh:"時程"},{en:"failure",zh:"故障、失敗"},{en:"replace",zh:"更換"},{en:"operate",zh:"操作"},{en:"warning light",zh:"警示燈"},{en:"restricted",zh:"受限制的"},{en:"improvement",zh:"改善"},{en:"production",zh:"生產"},{en:"available time",zh:"可用時間"},{en:"requirement",zh:"要求、需求"}
+];
+const KEY="tsmc288_progress_v2",METAKEY="tsmc288_meta_v2",MATHKEY="tsmc_math_v1",SPELLKEY="tsmc_spelling_v1";
+const levelNames=["未學","初見","認得","熟悉","穩定","已掌握"],intervals=[0,5*60e3,60*60e3,24*60*60e3,3*24*60*60e3,7*24*60*60e3];
+const MATH_CATS={production:"產能／目標",rate:"百分比／良率反推",time:"跨日／時差",distance:"相向／同向速度",average:"平均數反推",coordinate:"座標圖",chart:"表格／折線圖",basic:"基本計算"};
+let subject=null,P=loadProgress(),M=loadMeta(),MP=loadMath(),SP=loadSpelling();
+let study={queue:[],i:0,results:[],mode:"mixed",locked:false,currentType:"",roundWeak:[],selected:null},flash={unit:1,i:0,flipped:false};
+let engExam={q:[],i:0,answers:[],selected:null,left:0,timer:null};
+let mathPractice={q:[],i:0,results:[],locked:false},mathExam={q:[],i:0,answers:[],left:0,timer:null};
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}function ri(a,b){return Math.floor(Math.random()*(b-a+1))+a}function pick(a){return a[Math.floor(Math.random()*a.length)]}function byId(id){return WORDS.find(w=>w.id===id)}function unitOf(id){return Math.ceil(id/24)}
+function defaultRec(){return {level:0,seen:0,correct:0,wrong:0,streak:0,last:0,due:0,en2zh:0,zh2en:0}}
+function loadProgress(){let x={};try{x=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}WORDS.forEach(w=>{let r=Object.assign(defaultRec(),x[w.id]||{});r.en2zh=+r.en2zh||0;r.zh2en=+r.zh2en||0;r.level=Math.min(5,Math.min(r.en2zh,r.zh2en));x[w.id]=r});return x}
+function loadMeta(){try{return JSON.parse(localStorage.getItem(METAKEY)||'{"sessions":0,"answered":0,"correct":0}')}catch(e){return {sessions:0,answered:0,correct:0}}}
+function loadMath(){let d={answered:0,correct:0,sessions:0,best:0,cats:{}};try{d=Object.assign(d,JSON.parse(localStorage.getItem(MATHKEY)||"{}"))}catch(e){};Object.keys(MATH_CATS).forEach(k=>d.cats[k]=Object.assign({attempted:0,correct:0,wrong:0},d.cats[k]||{}));return d}
+function loadSpelling(){let d={answered:0,correct:0,byId:{}};try{d=Object.assign(d,JSON.parse(localStorage.getItem(SPELLKEY)||"{}"))}catch(e){};if(!d.byId)d.byId={};return d}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(P));localStorage.setItem(METAKEY,JSON.stringify(M));localStorage.setItem(MATHKEY,JSON.stringify(MP));localStorage.setItem(SPELLKEY,JSON.stringify(SP))}catch(e){}}
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.topnav button').forEach(x=>x.classList.remove('active'));let p=document.getElementById(id);if(!p)return;p.classList.add('active');let b=document.querySelector('.topnav button[data-page="'+id+'"]');if(b)b.classList.add('active');if(id==='engDash')renderEngDash();if(id==='engWords')renderWords();if(id==='engUnits')renderUnits();if(id==='engExam')renderEngReadiness();if(id==='mathDash')renderMathDash();if(id==='mathStudy')renderMathCats();if(id==='mathExam')renderMathReadiness();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.topnav button').forEach(b=>b.onclick=()=>{if(b.dataset.page==='home'){subject=null;setNav();}showPage(b.dataset.page)});
+function enterSubject(s){subject=s;setNav();showPage(s==='eng'?'engDash':'mathDash')}function setNav(){document.querySelectorAll('.engNav').forEach(x=>x.style.display=subject==='eng'?'inline-block':'none');document.querySelectorAll('.mathNav').forEach(x=>x.style.display=subject==='math'?'inline-block':'none')}
+
+const MORPH_TIPS={
+2:"字首 ab- 可用『離開、偏離』來記；normal＝正常 → ab + normal＝偏離正常。",
+15:"annual＝年度；字尾 -ly 常用來形成副詞或時間用法，annually＝每年。",
+19:"字首 auto-＝自己、自動；automatic 看到 auto- 就先抓『自動』。",
+20:"auto-＝自己／自動；automotive 與 automobile 汽車同一家族。",
+40:"字根 chem-＝化學；chemical 看到 chem- 就聯想到 chemistry。",
+55:"字尾 -tion 常把動作變成名詞；contaminate → contamination＝污染。",
+63:"day＝日；daily＝每日的。-ly 在時間字可直接記成『每…』。",
+70:"diffuse＝擴散；字尾 -ion 形成名詞 diffusion＝擴散。",
+78:"environment 可拆 environ（周圍）+ -ment（名詞）→ 周遭環境。",
+79:"equip＝裝備；-ment 形成名詞 equipment＝設備、裝備。",
+81:"etch＝蝕刻；-ing 表示動作／製程 → etching。",
+82:"extreme＝極端、ultra-＝超越、violet＝紫色；extreme ultraviolet＝極紫外。",
+112:"inhibit＝抑制／禁止；-ion → inhibition＝禁止、禁用。",
+115:"inspect＝檢查；-ion → inspection＝檢驗。",
+116:"instruct＝指示；-ion → instruction＝指令／說明。",
+117:"inter-＝在…之間；net＝網 → internet＝網際網路。",
+134:"litho- 與圖樣／石版相關，-graphy＝書寫／成像；lithography＝微影。",
+146:"manu- 可聯想到『手』，fact/fac＝做；manufacture＝製造。",
+151:"mechanic＝機械；-al 常形成形容詞 → mechanical＝機械的。",
+157:"month＝月；monthly＝每月的。",
+169:"operate＝操作；-ion → operation＝操作。",
+181:"person＝人；-al＝…的 → personal＝個人的。",
+190:"post-＝之後；postpone＝往後放 → 延期。",
+193:"pre-＝事前；prepare＝事前準備。",
+195:"press＝壓；pressure＝壓力。",
+196:"pre-＝事前；view＝看 → preview＝事前看＝預覽。",
+199:"prior＝較先；priority＝優先順序。看到 prior- 抓『先』。",
+208:"re-＝再、重新；re-certify＝重新認證。",
+211:"re-＝回、再；recover＝恢復／復機。",
+218:"re-＝重新；set＝設定 → reset＝重設。",
+219:"re-＝重新；work＝做 → rework＝重做。",
+224:"Standard + Operating + Procedures 的字首組成 S-O-P。",
+232:"semi-＝半；conductor＝導體 → semiconductor＝半導體。",
+239:"sort＝分類；-er＝做這件事的人／機器 → sorter＝排序機。",
+241:"specification 可抓 spec-＝看／檢視；工作上 spec＝規格。",
+251:"stock＝儲存／庫存；-er＝設備 → stocker＝儲存櫃。",
+255:"super-＝上方／監督；vis＝看；-or＝人 → supervisor＝監督者。",
+263:"technic/tech＝技術；-ian＝從事…的人 → technician＝技術員。",
+264:"tele-＝遠；phone＝聲音 → telephone＝遠距傳聲＝電話。",
+266:"thick＝厚；-ness＝狀態／程度 → thickness＝厚度。",
+272:"train＝訓練；-ing 形成名詞 training＝訓練。",
+276:"un- 可表示反向；load＝裝載 → unload＝卸載。",
+278:"user + name → username＝使用者名稱。",
+283:"warn＝警告；-ing → warning＝警告。",
+284:"week＝週；-ly＝每… → weekly＝每週。",
+288:"zero＝零；可和 zero defect（零缺陷）一起記。"
+};
+function morphTip(w){
+  if(MORPH_TIPS[w.id])return MORPH_TIPS[w.id];
+  const e=w.en.toLowerCase();
+  if(e.includes(' '))return `片語拆法：${w.en.split(' ').join(' + ')}。先分開認得每個小字，再把整組綁成「${w.zh}」。`;
+  if(e.startsWith('re-'))return `字首 re-＝再、重新；先抓 re-，再連到整字「${w.zh}」。`;
+  if(e.endsWith('tion')||e.endsWith('sion'))return `字尾 -tion / -sion 常形成名詞；看到尾巴可先判斷它多半是『動作／狀態的名詞』。`;
+  if(e.endsWith('ment'))return `字尾 -ment 常形成名詞；先找前面的動作或概念，再連到「${w.zh}」。`;
+  if(e.endsWith('er')||e.endsWith('or'))return `字尾 -er / -or 常表示『做某事的人或工具／設備』；再搭配前半部判斷。`;
+  if(e.endsWith('ian'))return `字尾 -ian 常表示『從事某領域的人』，這個字記成「${w.zh}」。`;
+  if(e.endsWith('ness'))return `字尾 -ness 常把形容詞變成『狀態／程度』名詞。`;
+  if(e.endsWith('ly'))return `字尾 -ly 常形成副詞；daily / weekly / monthly 這類可直接記成『每…』。`;
+  return `這個字不需要硬拆；先用整字＋工作情境記憶，避免拆出錯誤語源。`;
+}
+function fullMemoryTip(w){return `${memoryTip(w)}<div class="morphtip"><b>🔎 字首／字根／字尾：</b>${morphTip(w)}</div>`}
+function showAppMessage(msg,isError=false){let el=document.getElementById('appError');if(!el)return;el.style.display='block';el.textContent=msg;if(!isError)setTimeout(()=>{el.style.display='none'},3500)}
+function speakText(text){
+  try{
+    if(!('speechSynthesis' in window)){showAppMessage('這個瀏覽器目前不支援語音播放；可改用 Safari 或 Chrome。',true);return}
+    const clean=String(text||'').replace(/\s*\/\s*/g,' ');
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(clean);
+    u.lang='en-US';u.rate=.82;u.pitch=1;
+    window.speechSynthesis.speak(u);
+  }catch(e){showAppMessage('發音功能被瀏覽器限制，請直接用 Safari 或 Chrome 開啟。',true)}
+}
+function spellingAccepted(w,input){
+  const s=String(input||'').trim().toLowerCase().replace(/[‐‑–—]/g,'-').replace(/\s+/g,' ');
+  let accepted=[w.en.toLowerCase()];
+  if(w.id===82)accepted.push('euv','extreme ultraviolet');
+  if(w.id===224)accepted.push('sop','s.o.p','standard operating procedures');
+  if(w.id===241)accepted.push('spec','spec.','specification');
+  return accepted.includes(s);
+}
+function renderSpellingStats(){
+  const el=document.getElementById('spellingStats');if(!el)return;
+  const acc=SP.answered?Math.round(SP.correct/SP.answered*100):0;
+  el.innerHTML=`拼字累積：<b>${SP.answered}</b> 題｜正確率：<b>${acc}%</b>（不影響正式熟練度）`;
+}
+function memoryTip(w){if(MEMORY_TIPS[w.id])return MEMORY_TIPS[w.id];let e=w.en.toLowerCase();if(e.includes(' '))return `把片語拆開看：${w.en.split(' ').join(' + ')}；整組直接記成「${w.zh}」。`;if(e.endsWith('tion')||e.endsWith('sion'))return `看到 -tion / -sion 多半是名詞；${w.en} 就直接連到「${w.zh}」。`;return `想像工作現場真的出現「${w.zh}」，旁邊貼著英文「${w.en}」。連續念 3 次：${w.en} = ${w.zh}。`}
+function renderEngDash(){renderSpellingStats();let vals=WORDS.map(w=>P[w.id]),mastered=vals.filter(r=>r.level>=5).length,unseen=vals.filter(r=>r.seen===0).length,learning=288-mastered-unseen,total=M.answered||0,acc=total?Math.round(M.correct/total*100):0,pct=Math.round(mastered/288*100);[['mastered',mastered],['learning',learning],['unseen',unseen],['accuracy',acc+'%'],['masterPct',pct+'%']].forEach(x=>document.getElementById(x[0]).textContent=x[1]);document.getElementById('masterBar').style.width=pct+'%';let counts=[0,1,2,3,4,5].map(l=>vals.filter(r=>r.level===l).length);document.getElementById('levelStats').innerHTML=counts.map((n,l)=>`<div class="lvl"><b>${n}</b>${l} ${levelNames[l]}</div>`).join('');let due=WORDS.filter(w=>P[w.id].seen&&P[w.id].due<=Date.now()&&P[w.id].level<5).length,weak=WORDS.filter(w=>P[w.id].wrong>0&&P[w.id].level<4).length;document.getElementById('todayPlan').innerHTML=`到期複習：<b>${due}</b> 字<br>弱項：<b>${weak}</b> 字<br>尚未學：<b>${unseen}</b> 字`;document.getElementById('readyMsg').innerHTML=mastered>=270?`已掌握 <b>${mastered}/288</b>，可以大量做 20 題擬真模擬並清錯題。`:`目前掌握 <b>${mastered}/288</b>；正式熟練度只看英翻中＋中翻英，拼字為自我加強、不影響進度。`}
+function smartPool(n=25){let now=Date.now(),due=WORDS.filter(w=>P[w.id].seen&&P[w.id].due<=now&&P[w.id].level<5),weak=WORDS.filter(w=>P[w.id].seen&&P[w.id].level<4).sort((a,b)=>(P[b.id].wrong-P[a.id].wrong)||(P[a.id].level-P[b.id].level)),unseen=WORDS.filter(w=>P[w.id].seen===0),out=[],ids=new Set();for(let list of [due,weak,unseen,WORDS])for(let w of shuffle(list)){if(out.length>=n)break;if(!ids.has(w.id)){ids.add(w.id);out.push(w)}}return out.slice(0,n)}
+function startSmart(){startStudyWithWords(smartPool(25),'mixed','智慧複習')}
+function startWeak(){let arr=[...WORDS].sort((a,b)=>(P[b.id].wrong-P[a.id].wrong)||(P[a.id].level-P[b.id].level)).filter(w=>P[w.id].seen||P[w.id].wrong);if(!arr.length)arr=smartPool(25);startStudyWithWords(arr.slice(0,30),'mixed','弱項特訓')}
+function startEngMode(mode,n){startStudyWithWords(shuffle(WORDS).slice(0,n),mode,mode==='en2zh'?'英文→中文':'中文→英文')}
+function startSpelling(n=20,weakOnly=false){
+  let arr;
+  if(weakOnly){
+    arr=[...WORDS].sort((a,b)=>{
+      const A=SP.byId[a.id]||{wrong:0,correct:0},B=SP.byId[b.id]||{wrong:0,correct:0};
+      return (B.wrong-B.correct)-(A.wrong-A.correct) || B.wrong-A.wrong || Math.random()-.5;
+    }).filter(w=>(SP.byId[w.id]?.wrong||0)>0);
+    if(!arr.length)arr=shuffle(WORDS);
+  }else arr=shuffle(WORDS);
+  startStudyWithWords(arr.slice(0,n),'spelling',weakOnly?'拼字弱項｜自我加強':'拼字｜自我加強');
+}
+function startStudyWithWords(words,mode,label){subject='eng';setNav();showPage('engStudy');study={queue:words.map(w=>w.id),i:0,results:[],mode,locked:false,currentType:'',roundWeak:[],selected:null,label};document.getElementById('studySetup').style.display='none';document.getElementById('studyDone').style.display='none';document.getElementById('studyRun').style.display='block';renderStudy()}
+function chooseType(w){if(study.mode!=='mixed')return study.mode;let r=P[w.id];return r.zh2en<r.en2zh?'zh2en':(Math.random()<.5?'en2zh':'zh2en')}
+function distractors(w,field){let pool=shuffle(WORDS.filter(x=>x.id!==w.id&&unitOf(x.id)===unitOf(w.id))).slice(0,3);if(pool.length<3)pool=shuffle(WORDS.filter(x=>x.id!==w.id)).slice(0,3);return shuffle([w,...pool]).map(x=>field==='zh'?x.zh:x.en)}
+
+function renderStudy(){
+  if(study.i>=study.queue.length){endStudy(false);return}
+  let w=byId(study.queue[study.i]),type=study.currentType=chooseType(w);
+  study.locked=false;study.selected=null;
+  document.getElementById('studyCounter').textContent=`${study.i+1} / ${study.queue.length}`;
+  document.getElementById('studyModeLabel').textContent=study.label;
+  document.getElementById('studyBar').style.width=(study.i/study.queue.length*100)+'%';
+  document.getElementById('studyFeedback').className='feedback';
+  document.getElementById('studyFeedback').innerHTML='';
+  document.getElementById('studyNext').style.display='none';
+  document.getElementById('studySubmit').style.display=type==='spelling'?'inline-block':'none';
+  document.getElementById('studyPronounce').style.display=(type==='en2zh')?'inline-flex':'none';
+
+  if(type==='spelling'){
+    document.getElementById('studyQuestion').textContent=w.zh;
+    document.getElementById('studySub').textContent=`${w.pos}｜自我加強：請拼出英文（不影響熟練度）`;
+    document.getElementById('studyAnswer').innerHTML=`<input id="spellingInput" class="answerinput" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="輸入英文拼字" onkeydown="if(event.key==='Enter')submitStudy()">`;
+    setTimeout(()=>document.getElementById('spellingInput')?.focus(),50);
+    return;
+  }
+
+  let cs=distractors(w,type==='en2zh'?'zh':'en');
+  document.getElementById('studyQuestion').textContent=type==='en2zh'?w.en:w.zh;
+  document.getElementById('studySub').textContent=type==='en2zh'?`${w.pos}｜選出正確中文（可按 🔊 聽發音）`:'選出正確英文；按右側 🔊 可先聽發音';
+
+  if(type==='zh2en'){
+    document.getElementById('studyAnswer').innerHTML=`<div class="choices">${cs.map((c,i)=>`<div class="choiceRow"><button type="button" class="choice" data-v="${esc(c)}" onclick="pickStudy(this)">${i+1}. ${esc(c)}</button><button type="button" class="speakbtn" data-speak="${esc(c)}" onclick="event.stopPropagation();speakText(this.dataset.speak)" aria-label="播放 ${esc(c)} 發音">🔊</button></div>`).join('')}</div>`;
+  }else{
+    document.getElementById('studyAnswer').innerHTML=`<div class="choices">${cs.map((c,i)=>`<button type="button" class="choice" data-v="${esc(c)}" onclick="pickStudy(this)">${i+1}. ${esc(c)}</button>`).join('')}</div>`;
+  }
+}
+function pickStudy(btn){if(study.locked)return;study.selected=btn.dataset.v;submitStudy()}
+function submitStudy(){
+  if(study.locked)return;
+  let w=byId(study.queue[study.i]),type=study.currentType;
+
+  if(type==='spelling'){
+    const inp=document.getElementById('spellingInput');
+    const user=inp?inp.value:'';
+    if(!String(user).trim()){showAppMessage('請先輸入英文拼字。');return}
+    const ok=spellingAccepted(w,user);
+    study.locked=true;
+    study.results.push({id:w.id,ok,spelling:true});
+    SP.answered++;if(ok)SP.correct++;
+    const rec=SP.byId[w.id]||(SP.byId[w.id]={correct:0,wrong:0});
+    if(ok)rec.correct++;else{rec.wrong++;study.roundWeak.push(w.id);study.queue.splice(Math.min(study.i+5,study.queue.length),0,w.id)}
+    if(inp)inp.disabled=true;
+    let fb=document.getElementById('studyFeedback');
+    fb.className='feedback show '+(ok?'good':'bad');
+    fb.innerHTML=ok
+      ? `<b>✓ 拼字正確</b>　${esc(w.en)}＝${esc(w.zh)}<div class="pronounceLine"><button type="button" class="speakbtn" data-speak="${esc(w.en)}" onclick="speakText(this.dataset.speak)">🔊</button></div>`
+      : `<b>✗ 拼字錯誤</b><br>正確：<b>${esc(w.en)}</b> ${esc(w.pos)}＝<b>${esc(w.zh)}</b><div class="memorytip"><b>🧠 好記法：</b>${fullMemoryTip(w)}</div><div class="pronounceLine"><button type="button" class="speakbtn" data-speak="${esc(w.en)}" onclick="speakText(this.dataset.speak)">🔊</button></div>`;
+    document.getElementById('studySubmit').style.display='none';
+    document.getElementById('studyNext').style.display='inline-block';
+    save();renderSpellingStats();
+    return;
+  }
+
+  let user=study.selected;
+  if(!user)return;
+  let correct=type==='en2zh'?w.zh:w.en,ok=user===correct;
+  study.locked=true;updateWord(w,type,ok);study.results.push({id:w.id,ok});
+  if(!ok){study.roundWeak.push(w.id);study.queue.splice(Math.min(study.i+5,study.queue.length),0,w.id)}
+  document.querySelectorAll('#studyAnswer .choice').forEach(x=>{x.disabled=true;if(x.dataset.v===correct)x.classList.add('correct');else if(x.dataset.v===user)x.classList.add('wrong')});
+  let fb=document.getElementById('studyFeedback');
+  fb.className='feedback show '+(ok?'good':'bad');
+  fb.innerHTML=ok
+    ? `<b>✓ 正確</b>　${esc(w.en)} ${esc(w.pos)}＝${esc(w.zh)}`
+    : `<b>✗ 答錯</b><br>正確：<b>${esc(w.en)}</b> ${esc(w.pos)}＝<b>${esc(w.zh)}</b><div class="memorytip"><b>🧠 好記法：</b>${fullMemoryTip(w)}</div>`;
+  document.getElementById('studyNext').style.display='inline-block';
+  M.answered++;if(ok)M.correct++;save();renderEngDash();
+}
+function updateWord(w,type,ok){let r=P[w.id],now=Date.now();r.seen++;r.last=now;if(ok){r.correct++;r.streak++;r[type]=Math.min(5,(r[type]||0)+1)}else{r.wrong++;r.streak=0;r[type]=Math.max(0,(r[type]||0)-1)}r.level=Math.min(5,Math.min(r.en2zh,r.zh2en));r.due=now+(ok?intervals[r.level]:2*60e3)}
+function nextStudy(){study.i++;renderStudy()}
+function endStudy(early){
+  if(early&&!confirm('確定結束這回合？'))return;
+  const isSpell=study.mode==='spelling';
+  if(!isSpell)M.sessions++;
+  save();
+  document.getElementById('studyRun').style.display='none';
+  document.getElementById('studyDone').style.display='block';
+  let total=study.results.length,c=study.results.filter(x=>x.ok).length,p=total?Math.round(c/total*100):0;
+  document.getElementById('roundScore').textContent=p+'%';
+  document.getElementById('roundDetail').textContent=isSpell?`自我加強拼字：答對 ${c}/${total}；本成績不列入正式熟練度。`:`答對 ${c}/${total}；弱項 ${new Set(study.roundWeak).size} 字。`;
+  renderSpellingStats();
+}
+function resetStudyUI(){document.getElementById('studySetup').style.display='block';document.getElementById('studyRun').style.display='none';document.getElementById('studyDone').style.display='none';renderSpellingStats()}function speakCurrent(){let w=byId(study.queue[study.i]);if(w)speakText(w.en)}
+function renderUnits(){let el=document.getElementById('unitGrid');el.innerHTML='';for(let u=1;u<=12;u++){let ws=WORDS.filter(w=>unitOf(w.id)===u),m=ws.filter(w=>P[w.id].level>=5).length;el.innerHTML+=`<button class="unitbtn" onclick="openUnit(${u})"><b>第 ${u} 組</b><br><span class="tiny">#${ws[0].id}–${ws[23].id}｜掌握 ${m}/24</span></button>`}}function openUnit(u){flash={unit:u,i:0,flipped:false};document.getElementById('flashCardWrap').style.display='block';renderFlash()}function renderFlash(){let ws=WORDS.filter(w=>unitOf(w.id)===flash.unit),w=ws[flash.i];document.getElementById('flashTitle').textContent=`第 ${flash.unit} 組`;document.getElementById('flashEn').textContent=w.en+' '+w.pos;document.getElementById('flashZh').textContent=w.zh;document.getElementById('flashZh').style.display=flash.flipped?'block':'none';document.getElementById('flashCount').textContent=`${flash.i+1}/24`}function flipCard(){flash.flipped=!flash.flipped;renderFlash()}function nextFlash(){flash.i=(flash.i+1)%24;flash.flipped=false;renderFlash()}function prevFlash(){flash.i=(flash.i+23)%24;flash.flipped=false;renderFlash()}function closeFlash(){document.getElementById('flashCardWrap').style.display='none'}function quizCurrentUnit(){startStudyWithWords(shuffle(WORDS.filter(w=>unitOf(w.id)===flash.unit)),'mixed',`第 ${flash.unit} 組測驗`)}
+function renderWords(){let q=(document.getElementById('wordSearch')?.value||'').toLowerCase(),lv=document.getElementById('wordLevelFilter')?.value||'all',uf=document.getElementById('wordUnitFilter')?.value||'all';let arr=WORDS.filter(w=>(!q||w.en.toLowerCase().includes(q)||w.zh.includes(q))&&(lv==='all'||String(P[w.id].level)===lv)&&(uf==='all'||String(unitOf(w.id))===uf));document.getElementById('wordBody').innerHTML=arr.map(w=>`<tr><td>${w.id}</td><td><b>${esc(w.en)}</b></td><td>${esc(w.pos)}</td><td>${esc(w.zh)}</td><td><span class="badge b${P[w.id].level}">${P[w.id].level} ${levelNames[P[w.id].level]}</span></td><td>${P[w.id].wrong}</td><td><button class="btn ghost" style="padding:6px 8px" onclick="speakWord(${w.id})">🔊</button></td></tr>`).join('')}function speakWord(id){let w=byId(id);if(w)speakText(w.en)}function initUnitFilter(){let s=document.getElementById('wordUnitFilter');for(let u=1;u<=12;u++)s.innerHTML+=`<option value="${u}">第 ${u} 組</option>`}
+function renderEngReadiness(){let master=WORDS.filter(w=>P[w.id].level>=5).length,acc=M.answered?Math.round(M.correct/M.answered*100):0;document.getElementById('engExamReadiness').innerHTML=`<p>已掌握：<b>${master}/288</b></p><p>累積正確率：<b>${acc}%</b></p><div class="note ${master>=250&&acc>=85?'good':''}">${master>=250&&acc>=85?'可以進入大量擬真模擬；每次錯題都回弱項複習。':'建議先把掌握數推高，再用 20 題模擬驗收。'}</div>`}
+function extraDistractors(item,field){let pool=field==='zh'?EXTRA_WORDS.map(x=>x.zh):EXTRA_WORDS.map(x=>x.en);let correct=field==='zh'?item.zh:item.en;return shuffle([correct,...shuffle(pool.filter(x=>x!==correct)).slice(0,3)])}
+function startEngExam(){let realistic=document.getElementById('engExamSource').value==='realistic',base=shuffle(WORDS).slice(0,realistic?18:20).map(w=>({kind:'word',w,type:Math.random()<.5?'en2zh':'zh2en'}));if(realistic)base.push(...shuffle(EXTRA_WORDS).slice(0,2).map(w=>({kind:'extra',w,type:Math.random()<.5?'en2zh':'zh2en'})));engExam={q:shuffle(base),i:0,answers:[],selected:null,left:+document.getElementById('engExamTime').value,timer:null};document.getElementById('engExamSetup').style.display='none';document.getElementById('engExamDone').style.display='none';document.getElementById('engExamRun').style.display='block';if(engExam.left>0)engExam.timer=setInterval(()=>{engExam.left--;updateEngTimer();if(engExam.left<=0)finishEngExam(true)},1000);renderEngExam();updateEngTimer()}
+function updateEngTimer(){let el=document.getElementById('engExamTimer');if(!engExam.left&&!engExam.timer){el.textContent='不限時';return}let m=Math.floor(Math.max(0,engExam.left)/60),s=Math.max(0,engExam.left)%60;el.textContent=`${m}:${String(s).padStart(2,'0')}`}
+function renderEngExam(){let q=engExam.q[engExam.i],w=q.w,type=q.type;engExam.selected=null;document.getElementById('engExamCounter').textContent=`${engExam.i+1}/20`;document.getElementById('engExamBar').style.width=(engExam.i/20*100)+'%';document.getElementById('engExamQuestion').textContent=type==='en2zh'?w.en:w.zh;document.getElementById('engExamSub').textContent=q.kind==='extra'?'延伸常見字':'288 題庫';let cs=q.kind==='word'?distractors(w,type==='en2zh'?'zh':'en'):extraDistractors(w,type==='en2zh'?'zh':'en');document.getElementById('engExamChoices').innerHTML=cs.map((c,i)=>`<button type="button" class="choice" data-v="${esc(c)}" onclick="pickEngExam(this)">${i+1}. ${esc(c)}</button>`).join('')}
+function pickEngExam(btn){engExam.selected=btn.dataset.v;document.querySelectorAll('#engExamChoices .choice').forEach(x=>x.style.outline='');btn.style.outline='3px solid #9ebbea'}
+function nextEngExam(){if(!engExam.selected){alert('請先選答案');return}let q=engExam.q[engExam.i],correct=q.type==='en2zh'?q.w.zh:q.w.en,ok=engExam.selected===correct;engExam.answers.push({q,user:engExam.selected,correct,ok});if(q.kind==='word'){updateWord(q.w,q.type,ok);M.answered++;if(ok)M.correct++;save()}if(engExam.i<19){engExam.i++;renderEngExam()}else finishEngExam(false)}
+function finishEngExam(timeout){clearInterval(engExam.timer);engExam.timer=null;if(timeout&&engExam.i<20){if(engExam.selected){let q=engExam.q[engExam.i],correct=q.type==='en2zh'?q.w.zh:q.w.en;engExam.answers.push({q,user:engExam.selected,correct,ok:engExam.selected===correct})}for(let j=engExam.answers.length;j<20;j++){let q=engExam.q[j],correct=q.type==='en2zh'?q.w.zh:q.w.en;engExam.answers.push({q,user:'（未作答）',correct,ok:false})}}document.getElementById('engExamRun').style.display='none';document.getElementById('engExamDone').style.display='block';let c=engExam.answers.filter(x=>x.ok).length,p=Math.round(c/20*100);document.getElementById('engExamScore').textContent=p+'%';document.getElementById('engExamSummary').innerHTML=`答對 <b>${c}/20</b>${timeout?'；時間到自動交卷。':''}`;let wrong=engExam.answers.filter(x=>!x.ok);document.getElementById('engExamReview').innerHTML=wrong.length?'<h3>錯題檢討</h3>'+wrong.map(x=>{let w=x.q.w,tip=x.q.kind==='word'?`<div class="memorytip"><b>🧠 好記法：</b>${fullMemoryTip(w)}</div>`:'';return `<div style="padding:10px 0;border-bottom:1px solid var(--line)"><b>${esc(w.en)} = ${esc(w.zh)}</b><div class="examAnswer">你的答案：${esc(x.user)}</div>${tip}</div>`}).join(''):'<div class="note good">全對！</div>';renderEngDash();renderEngReadiness()}function quitEngExam(){if(confirm('確定退出英文模擬？')){clearInterval(engExam.timer);document.getElementById('engExamRun').style.display='none';document.getElementById('engExamSetup').style.display='block'}}
+
+// ===== Math generator =====
+
+function answerNum(q,x){let n=Number(String(x).replace(/,/g,'').replace(/%/g,'').trim());return Number.isFinite(n)&&Math.abs(n-q.answer)<=q.tol}
+function answerCoord(q,x){let s=String(x).replace(/[()（）\s]/g,'').replace('，',',');return s===q.answer}
+function answerTime(q,x){let s=String(x).trim().toLowerCase().replace(/：/g,':').replace(/\s/g,'');let map=q.accept||[String(q.answer).toLowerCase()];return map.includes(s)}
+function normalizeDateTime(s){
+ s=String(s).trim().replace(/月/g,'/').replace(/日/g,' ').replace(/：/g,':').replace(/-/g,'/').replace(/\s+/g,' ');
+ let m=s.match(/^0?(\d{1,2})\/0?(\d{1,2})\s+(\d{1,2}):(\d{2})$/);
+ if(!m)return '';
+ return `${Number(m[1])}/${Number(m[2])} ${String(Number(m[3])).padStart(2,'0')}:${m[4]}`;
+}
+function answerDateTime(q,x){return normalizeDateTime(x)===normalizeDateTime(q.answer)}
+
+function lineChartSVG(labels,values,title){
+  // V8: no value labels on points. User must read the Y axis.
+  let W=640,H=320,L=68,R=28,T=45,B=56;
+  let lo=Math.floor((Math.min(...values)-20)/10)*10,hi=Math.ceil((Math.max(...values)+20)/10)*10;
+  lo=Math.max(0,lo);
+  let px=i=>L+i*((W-L-R)/(labels.length-1)),py=v=>T+(hi-v)*(H-T-B)/(hi-lo||1);
+  let grid='';
+  for(let v=lo;v<=hi;v+=10){
+    let y=py(v);
+    grid+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#e7e9ee"/>`+
+          `<text x="${L-9}" y="${y+4}" text-anchor="end" class="chartlabel">${v}</text>`;
+  }
+  let pts=values.map((v,i)=>`${px(i)},${py(v)}`).join(' ');
+  let dots=values.map((v,i)=>`<circle cx="${px(i)}" cy="${py(v)}" r="4.5" fill="#6840c6"/>`+
+    `<text x="${px(i)}" y="${H-24}" text-anchor="middle" class="chartlabel">${labels[i]}</text>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}">
+    <text x="${W/2}" y="23" text-anchor="middle" font-weight="700">${title}</text>
+    ${grid}
+    <line x1="${L}" y1="${T}" x2="${L}" y2="${H-B}" stroke="#667085" stroke-width="2"/>
+    <line x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}" stroke="#667085" stroke-width="2"/>
+    <polyline points="${pts}" fill="none" stroke="#6840c6" stroke-width="3"/>
+    ${dots}
+  </svg>`;
+}
+function multiLineChartSVG(labels,series,title){
+  // V8: closer to reported interview graph-reading questions: several companies, no point values printed.
+  let W=680,H=350,L=72,R=30,T=58,B=62;
+  let all=series.flatMap(s=>s.values);
+  let lo=Math.max(0,Math.floor((Math.min(...all)-20)/10)*10),hi=Math.ceil((Math.max(...all)+20)/10)*10;
+  let px=i=>L+i*((W-L-R)/(labels.length-1)),py=v=>T+(hi-v)*(H-T-B)/(hi-lo||1);
+  let grid='';
+  for(let v=lo;v<=hi;v+=10){
+    let y=py(v);
+    grid+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#e7e9ee"/>`+
+          `<text x="${L-9}" y="${y+4}" text-anchor="end" class="chartlabel">${v}</text>`;
+  }
+  const colors=['#6840c6','#2469c9','#b54708'];
+  let paths='',legend='';
+  series.forEach((s,si)=>{
+    let pts=s.values.map((v,i)=>`${px(i)},${py(v)}`).join(' ');
+    paths+=`<polyline points="${pts}" fill="none" stroke="${colors[si]}" stroke-width="3"/>`;
+    paths+=s.values.map((v,i)=>`<circle cx="${px(i)}" cy="${py(v)}" r="4.5" fill="${colors[si]}"/>`).join('');
+    let lx=L+si*145;
+    legend+=`<line x1="${lx}" y1="39" x2="${lx+24}" y2="39" stroke="${colors[si]}" stroke-width="3"/>`+
+            `<text x="${lx+31}" y="43" class="chartlabel">${s.name}</text>`;
+  });
+  let xlabels=labels.map((l,i)=>`<text x="${px(i)}" y="${H-27}" text-anchor="middle" class="chartlabel">${l}</text>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}">
+    <text x="${W/2}" y="22" text-anchor="middle" font-weight="700">${title}</text>
+    ${legend}${grid}
+    <line x1="${L}" y1="${T}" x2="${L}" y2="${H-B}" stroke="#667085" stroke-width="2"/>
+    <line x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}" stroke="#667085" stroke-width="2"/>
+    ${paths}${xlabels}
+  </svg>`;
+}
+function coordSVG(x,y,w,h){
+  // V8: only the given point A displays coordinates. B/C/D labels no longer reveal the answer.
+  let W=520,H=330,cx=W/2,cy=H/2,s=20,px=v=>cx+v*s,py=v=>cy-v*s,grid='';
+  for(let i=-10;i<=10;i++){
+    grid+=`<line x1="${px(i)}" y1="${py(-7)}" x2="${px(i)}" y2="${py(7)}" stroke="#eef0f4"/>`+
+          `<line x1="${px(-10)}" y1="${py(i)}" x2="${px(10)}" y2="${py(i)}" stroke="#eef0f4"/>`;
+  }
+  let A=[x,y],B=[x+w,y],C=[x+w,y-h],D=[x,y-h];
+  let poly=[A,B,C,D].map(p=>`${px(p[0])},${py(p[1])}`).join(' ');
+  const lab=(p,n,text)=>`<circle cx="${px(p[0])}" cy="${py(p[1])}" r="5" fill="#6840c6"/>`+
+    `<text x="${px(p[0])+8}" y="${py(p[1])-8}" class="chartlabel">${text||n}</text>`;
+  let pts=lab(A,'A',`A(${A[0]},${A[1]})`)+lab(B,'B','B')+lab(C,'C','C')+lab(D,'D','D');
+  let ticks='';
+  for(let i=-8;i<=8;i+=2){
+    if(i!==0){
+      ticks+=`<text x="${px(i)}" y="${cy+18}" text-anchor="middle" class="axislabel">${i}</text>`;
+      if(i>=-6&&i<=6)ticks+=`<text x="${cx-10}" y="${py(i)+4}" text-anchor="end" class="axislabel">${i}</text>`;
+    }
+  }
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="座標圖">
+    ${grid}
+    <line x1="${px(-10)}" y1="${cy}" x2="${px(10)}" y2="${cy}" stroke="#667085" stroke-width="2"/>
+    <line x1="${cx}" y1="${py(-7)}" x2="${cx}" y2="${py(7)}" stroke="#667085" stroke-width="2"/>
+    ${ticks}
+    <text x="${W-20}" y="${cy-8}" class="axislabel">x</text>
+    <text x="${cx+8}" y="18" class="axislabel">y</text>
+    <polygon points="${poly}" fill="#f0ebff" stroke="#6840c6" stroke-width="3"/>
+    ${pts}
+  </svg>`;
+}
+function makeMath(cat){
+ if(cat==='mixed')cat=pick(Object.keys(MATH_CATS));
+
+ if(cat==='production'){
+  let kind=ri(1,4);
+  if(kind===1){let a=ri(20,60)*10,b=ri(20,55)*10,h=ri(3,12);return {cat,prompt:`A 機台每小時生產 ${a} 片，B 機台每小時生產 ${b} 片，兩台同時運作 ${h} 小時，共生產多少片？`,answer:(a+b)*h,tol:0,hint:'答案輸入片數',steps:`(${a} + ${b}) × ${h} = ${(a+b)*h} 片`}}
+  if(kind===2){let rate=ri(18,38)*10,h=ri(5,14),remain=ri(5,20)*100,target=rate*h+remain;return {cat,prompt:`某機台每小時生產 ${rate} 片，已生產 ${h} 小時後，距離今日目標還差 ${remain} 片。今日目標產量是多少片？`,answer:target,tol:0,hint:'答案輸入片數',steps:`已生產 ${rate} × ${h} = ${rate*h}；目標 = ${rate*h} + ${remain} = ${target} 片`}}
+  if(kind===3){let rate=ri(40,90)*10,h=ri(6,14),target=rate*h;return {cat,prompt:`A、B 兩台機台合計每小時可生產 ${rate} 片。要完成 ${target} 片，需要幾小時？`,answer:h,tol:0,hint:'答案輸入小時數',steps:`${target} ÷ ${rate} = ${h} 小時`}}
+  let base=ri(20,55)*100,pct=pick([5,10,15,20]),inc=base*pct/100;return {cat,prompt:`昨日產量 ${base} 片，今天的目標要比昨日增加 ${pct}%。今天目標產量是多少片？`,answer:base+inc,tol:0,hint:'答案輸入片數',steps:`增加量 = ${base} × ${pct}% = ${inc}；目標 = ${base} + ${inc} = ${base+inc} 片`}
+ }
+
+ if(cat==='rate'){
+  let kind=ri(1,4),pct=pick([2,4,5,8,10,12,15,20]);
+  if(kind===1){let total=pick([1000,2000,5000,10000,20000]),bad=total*pct/100;return {cat,prompt:`一批產品共有 ${total} 片，其中不合格 ${bad} 片。不良率是多少 %？`,answer:pct,tol:.01,hint:'只輸入百分比數字，例如 5',steps:`不良率 = ${bad} ÷ ${total} × 100% = ${pct}%`}}
+  if(kind===2){let total=pick([1000,2000,5000,10000,20000]),bad=total*pct/100,good=total-bad,y=100-pct;return {cat,prompt:`一批產品共有 ${total} 片，其中合格 ${good} 片。良率是多少 %？`,answer:y,tol:.01,hint:'只輸入百分比數字',steps:`良率 = ${good} ÷ ${total} × 100% = ${y}%`}}
+  if(kind===3){
+   let total=pick([5000,10000,15000,20000,25000]),bad=total*pct/100,good=total-bad;
+   return {cat,prompt:`某批產品良品共有 ${good} 片，不良率為 ${pct}%。這一批原本總產量是多少片？`,answer:total,tol:.01,hint:'注意：良品只占 (100%－不良率)，答案輸入總片數',steps:`良品率 = 100% - ${pct}% = ${100-pct}%；總產量 = ${good} ÷ ${(100-pct)/100} = ${total} 片`}
+  }
+  let total=pick([5000,10000,15000,20000]),yieldPct=pick([80,85,90,92,95]),good=total*yieldPct/100;
+  return {cat,prompt:`良品有 ${good} 片，良率為 ${yieldPct}%。原本投入生產的總數是多少片？`,answer:total,tol:.01,hint:'總數 = 良品 ÷ 良率',steps:`總數 = ${good} ÷ ${yieldPct/100} = ${total} 片`}
+ }
+
+ if(cat==='time'){
+  let kind=ri(1,2),month=9,day=ri(10,20),depH,depM,delay,flightH,offset,dir,total;
+  if(kind===1){depH=pick([20,21,22,23]);depM=pick([0,10,20,30,40,50]);delay=pick([30,50,60,90]);flightH=ri(7,13);offset=pick([1,2,7,8]);dir=pick(['slow','fast']);}
+  else{depH=pick([0,1,2,3]);depM=pick([0,15,30,45]);delay=pick([0,30,60]);flightH=ri(2,5);offset=pick([6,7,8]);dir='slow';}
+  total=day*1440+depH*60+depM+delay+flightH*60+(dir==='slow'?-offset*60:offset*60);
+  let arrDay=Math.floor(total/1440),tod=((total%1440)+1440)%1440,ah=Math.floor(tod/60),am=tod%60;
+  if(arrDay===day)return makeMath('time');
+  let ans=`${month}/${arrDay} ${String(ah).padStart(2,'0')}:${String(am).padStart(2,'0')}`;
+  return {cat,type:'datetime',prompt:`班機原訂台灣時間 ${month}/${day} ${String(depH).padStart(2,'0')}:${String(depM).padStart(2,'0')} 出發，${delay?`延誤 ${delay} 分鐘，`:''}飛行 ${flightH} 小時。目的地時間比台灣${dir==='slow'?'慢':'快'} ${offset} 小時。抵達目的地的「日期＋當地時間」是多少？`,answer:ans,hint:'格式：9/11 02:30（要寫日期）',steps:`先算台灣時間：${month}/${day} ${String(depH).padStart(2,'0')}:${String(depM).padStart(2,'0')} ${delay?`+ ${delay} 分`:''} + ${flightH} 小時；再${dir==='slow'?'減':'加'} ${offset} 小時時差。跨日後答案 = ${ans}`}
+ }
+
+ if(cat==='distance'){
+  let kind=ri(1,3);
+  if(kind===1){let a=ri(3,7)*10,b=ri(3,7)*10,t=ri(5,15);return {cat,prompt:`甲每分鐘走 ${a} 公尺，乙每分鐘走 ${b} 公尺，兩人相向而行，${t} 分鐘後相遇。原本相距多少公尺？`,answer:(a+b)*t,tol:0,hint:'相向而行：速度相加',steps:`相向速度 = ${a}+${b}=${a+b} 公尺/分；距離 = ${a+b} × ${t} = ${(a+b)*t} 公尺`}}
+  if(kind===2){let slow=ri(3,6)*10,fast=slow+ri(1,4)*10,t=ri(5,15),gap=(fast-slow)*t;return {cat,prompt:`乙每分鐘走 ${slow} 公尺，甲在乙後方 ${gap} 公尺，以每分鐘 ${fast} 公尺同方向追趕。甲需要幾分鐘追上乙？`,answer:t,tol:0,hint:'同方向追趕：速度相減',steps:`追趕速度 = ${fast}-${slow}=${fast-slow} 公尺/分；時間 = ${gap} ÷ ${fast-slow} = ${t} 分鐘`}}
+  let slow=ri(3,6)*10,fast=slow+ri(1,4)*10,t=ri(5,12),gap=(fast-slow)*t;return {cat,prompt:`兩人同方向前進，前方的乙速度為 ${slow} 公尺/分，後方的甲速度為 ${fast} 公尺/分。若甲在 ${t} 分鐘後追上乙，起初兩人相距多少公尺？`,answer:gap,tol:0,hint:'起始距離 = 速度差 × 時間',steps:`速度差 = ${fast}-${slow}=${fast-slow}；距離 = ${fast-slow} × ${t} = ${gap} 公尺`}
+ }
+
+ if(cat==='average'){
+  let kind=ri(1,3);
+  if(kind===1){let vals=[ri(6,18),ri(6,18),ri(6,18)],x=ri(6,18),sum=vals.reduce((a,b)=>a+b,0)+x;if(sum%4)return makeMath('average');let avg=sum/4;return {cat,prompt:`A、B、C、D 四組人數分別為 ${vals[0]}、${vals[1]}、${vals[2]}、X，人數平均為 ${avg}。X 是多少？`,answer:x,tol:0,hint:'先用平均 × 組數求總數',steps:`總人數 = ${avg} × 4 = ${avg*4}；X = ${avg*4} - ${vals[0]} - ${vals[1]} - ${vals[2]} = ${x}`}}
+  if(kind===2){let a=ri(80,160)*10,b=ri(80,160)*10,x=ri(80,160)*10,sum=a+b+x;if(sum%3)return makeMath('average');let avg=sum/3;return {cat,prompt:`某機台前三個月產量分別為 ${a}、${b}、X 片，三個月平均產量為 ${avg} 片。第三個月 X 為多少片？`,answer:x,tol:0,hint:'總產量 = 平均 × 3',steps:`三個月總量 = ${avg} × 3 = ${avg*3}；X = ${avg*3} - ${a} - ${b} = ${x} 片`}}
+  let vals=[ri(50,90),ri(50,90),ri(50,90),ri(50,90)],x=ri(50,90),sum=vals.reduce((a,b)=>a+b,0)+x;if(sum%5)return makeMath('average');let avg=sum/5;return {cat,prompt:`5 位技術員的測驗平均為 ${avg} 分，其中 4 人分數為 ${vals.join('、')} 分，第 5 人幾分？`,answer:x,tol:0,hint:'平均 × 5，再扣掉已知 4 人',steps:`總分 = ${avg} × 5 = ${avg*5}；第 5 人 = ${avg*5} - ${vals.join(' - ')} = ${x} 分`}
+ }
+
+ if(cat==='coordinate'){
+  let x=ri(-6,0),y=ri(2,7),w=ri(2,6),h=ri(2,6),ans=`${x+w},${y-h}`;
+  return {cat,type:'coord',prompt:`請看座標圖。矩形邊與座標軸平行，已知左上角 A=(${x}, ${y})，寬 ${w}、高 ${h}。右下角 C 的座標是多少？`,answer:ans,hint:'格式：x,y，例如 3,-1',steps:`A 向右 ${w}：x=${x}+${w}=${x+w}；再向下 ${h}：y=${y}-${h}=${y-h}；所以 C=(${x+w}, ${y-h})`,visual:coordSVG(x,y,w,h)}
+ }
+
+ if(cat==='chart'){
+  let kind=ri(1,3);
+
+  // Multi-company annual revenue graph: values are still basic arithmetic,
+  // but the answer is not printed on the points; user must read the Y-axis.
+  if(kind<=2){
+    let labels=['2006','2007','2008','2009'];
+    let gridVals=[60,70,80,90,100,110,120,130,140,150,160,170];
+    let makeVals=()=>shuffle(gridVals).slice(0,4);
+    let series=[
+      {name:'A公司',values:makeVals()},
+      {name:'B公司',values:makeVals()},
+      {name:'C公司',values:makeVals()}
+    ];
+    let s=series[ri(0,2)];
+    let i=ri(0,2),j=i+1;
+    if(kind===1){
+      let ans=Math.abs(s.values[j]-s.values[i]);
+      return {
+        cat,
+        prompt:`請看折線圖。${s.name} ${labels[j]} 年與 ${labels[i]} 年的營收相差多少百萬元？`,
+        answer:ans,tol:0,
+        hint:'從圖上的 Y 軸刻度讀出兩年數值，再相減',
+        steps:`${s.name} ${labels[i]} 年 = ${s.values[i]}；${labels[j]} 年 = ${s.values[j]}；相差 = |${s.values[j]} - ${s.values[i]}| = ${ans} 百萬元`,
+        visual:multiLineChartSVG(labels,series,'各公司年度營收（百萬元）')
+      };
+    }else{
+      let k=ri(0,3),ans=s.values[k];
+      return {
+        cat,
+        prompt:`請看折線圖。${s.name} ${labels[k]} 年的營收是多少百萬元？`,
+        answer:ans,tol:0,
+        hint:'依圖例找到公司，再從 Y 軸讀值',
+        steps:`由圖例找到 ${s.name}，再讀 ${labels[k]} 年的點，數值 = ${ans} 百萬元`,
+        visual:multiLineChartSVG(labels,series,'各公司年度營收（百萬元）')
+      };
+    }
+  }
+
+  // Table reverse-average question remains as another reported style.
+  let labels=['1月','2月','3月'];
+  let v1=ri(8,22),v2=ri(8,22),v3=ri(8,22),sum=v1+v2+v3;
+  if(sum%3!==0)return makeMath('chart');
+  let avg=sum/3,hide=ri(0,2),vals=[v1,v2,v3];
+  let rows=labels.map((l,i)=>`<tr><th>${l}</th><td>${i===hide?'？':vals[i]} 人</td></tr>`).join('');
+  return {
+    cat,
+    prompt:`請看表格。1～3 月平均每月新進人數為 ${avg} 人，表格中的「？」是多少人？`,
+    answer:vals[hide],tol:0,
+    hint:'平均 × 月數 = 總人數',
+    steps:`三個月總人數 = ${avg} × 3 = ${sum}；扣掉已知月份後，？ = ${vals[hide]} 人`,
+    visual:`<table><thead><tr><th>月份</th><th>新進人數</th></tr></thead><tbody>${rows}</tbody></table>`
+  };
+ }
+
+ let a=ri(20,90),b=ri(2,9),c=ri(2,10),ans=a+b*c;
+ return {cat:'basic',prompt:`計算：${a} + ${b} × ${c} = ?`,answer:ans,tol:0,hint:'先乘除、後加減',steps:`先算 ${b} × ${c} = ${b*c}；再算 ${a} + ${b*c} = ${ans}`}
+}
+function isMathCorrect(q,x){if(q.type==='coord')return answerCoord(q,x);if(q.type==='datetime')return answerDateTime(q,x);if(q.type==='time')return answerTime(q,x);return answerNum(q,x)}
+function renderMathCats(){document.getElementById('mathCatGrid').innerHTML=Object.entries(MATH_CATS).map(([k,v])=>`<button type="button" class="cat" onclick="startMathPractice('${k}',10)"><b>${v}</b><br><span class="tiny">練 10 題</span></button>`).join('')}
+function renderMathDash(){let acc=MP.answered?Math.round(MP.correct/MP.answered*100):0;document.getElementById('mathAnswered').textContent=MP.answered;document.getElementById('mathAcc').textContent=acc+'%';document.getElementById('mathSessions').textContent=MP.sessions;document.getElementById('mathBest').textContent=MP.best+'%';let sorted=Object.entries(MP.cats).sort((a,b)=>{let aa=a[1].attempted?a[1].correct/a[1].attempted:1,bb=b[1].attempted?b[1].correct/b[1].attempted:1;return aa-bb});document.getElementById('mathCatStats').innerHTML=sorted.map(([k,r])=>`<div style="margin:7px 0">${MATH_CATS[k]}：<b>${r.attempted?Math.round(r.correct/r.attempted*100):0}%</b> <span class="tiny">(${r.attempted} 題)</span></div>`).join('');let weak=sorted[0];document.getElementById('mathAdvice').innerHTML=MP.answered<20?'先做 10～20 題綜合練習，讓系統知道你的弱項。':`目前最需要補的是：<b>${MATH_CATS[weak[0]]}</b>。先單獨練 10 題，再做 7 題模擬。`}
+function startMathPractice(cat,n){subject='math';setNav();showPage('mathStudy');mathPractice={q:Array.from({length:n},()=>makeMath(cat)),i:0,results:[],locked:false};document.getElementById('mathSetup').style.display='none';document.getElementById('mathDone').style.display='none';document.getElementById('mathRun').style.display='block';renderMathQuestion()}
+function startMathWeak(){let entries=Object.entries(MP.cats).sort((a,b)=>{let aa=a[1].attempted?a[1].correct/a[1].attempted:1,bb=b[1].attempted?b[1].correct/b[1].attempted:1;return aa-bb});startMathPractice(entries[0][0],10)}
+function renderMathQuestion(){if(mathPractice.i>=mathPractice.q.length){endMathPractice(false);return}let q=mathPractice.q[mathPractice.i];mathPractice.locked=false;document.getElementById('mathCounter').textContent=`${mathPractice.i+1}/${mathPractice.q.length}`;document.getElementById('mathCatLabel').textContent=MATH_CATS[q.cat];document.getElementById('mathBar').style.width=(mathPractice.i/mathPractice.q.length*100)+'%';document.getElementById('mathQuestion').textContent=q.prompt;document.getElementById('mathVisual').innerHTML=q.visual||'';document.getElementById('mathHint').textContent=q.hint||'';document.getElementById('mathAnswer').value='';document.getElementById('mathAnswer').disabled=false;document.getElementById('mathScratch').value='';document.getElementById('mathFeedback').className='feedback';document.getElementById('mathSubmit').style.display='inline-block';document.getElementById('mathNext').style.display='none';setTimeout(()=>document.getElementById('mathAnswer').focus(),30)}
+function submitMathAnswer(){if(mathPractice.locked)return;let q=mathPractice.q[mathPractice.i],user=document.getElementById('mathAnswer').value;if(!user.trim())return;let ok=isMathCorrect(q,user);mathPractice.locked=true;mathPractice.results.push({q,user,ok});MP.answered++;MP.cats[q.cat].attempted++;if(ok){MP.correct++;MP.cats[q.cat].correct++}else{MP.cats[q.cat].wrong++;if(mathPractice.q.length<25)mathPractice.q.splice(Math.min(mathPractice.i+4,mathPractice.q.length),0,makeMath(q.cat))}save();let fb=document.getElementById('mathFeedback');fb.className='feedback show '+(ok?'good':'bad');fb.innerHTML=`<b>${ok?'✓ 答對':'✗ 答錯'}</b><br>正確答案：<b>${esc(q.answer)}</b><div class="mathsteps"><b>解題步驟：</b><br>${esc(q.steps)}</div>`;document.getElementById('mathAnswer').disabled=true;document.getElementById('mathSubmit').style.display='none';document.getElementById('mathNext').style.display='inline-block';renderMathDash()}
+function nextMathQuestion(){mathPractice.i++;renderMathQuestion()}function endMathPractice(early){if(early&&!confirm('確定結束數學練習？'))return;MP.sessions++;save();document.getElementById('mathRun').style.display='none';document.getElementById('mathDone').style.display='block';let t=mathPractice.results.length,c=mathPractice.results.filter(x=>x.ok).length,p=t?Math.round(c/t*100):0;document.getElementById('mathRoundScore').textContent=p+'%';document.getElementById('mathRoundDetail').textContent=`答對 ${c}/${t}。`}function resetMathUI(){document.getElementById('mathSetup').style.display='block';document.getElementById('mathRun').style.display='none';document.getElementById('mathDone').style.display='none'}
+function renderMathReadiness(){let acc=MP.answered?Math.round(MP.correct/MP.answered*100):0,core=['production','rate','time','distance','average','coordinate','chart'],covered=core.filter(k=>MP.cats[k]&&MP.cats[k].attempted>=3).length;document.getElementById('mathReadiness').innerHTML=`<p>累積作答：<b>${MP.answered}</b></p><p>正確率：<b>${acc}%</b></p><p>核心題型充分練過：<b>${covered}/7</b></p><div class="note ${MP.answered>=40&&acc>=80&&covered>=6?'good':''}">${MP.answered>=40&&acc>=80&&covered>=6?'可以進入 7 題計時模擬。':'先把 7 個核心題型都練過，並把正確率推到 80% 以上。'}</div>`}
+function startMathExam(){let cats=shuffle(['production','rate','time','distance','average','coordinate','chart']);mathExam={q:cats.map(c=>makeMath(c)),i:0,answers:[],left:+document.getElementById('mathExamTime').value,timer:null};document.getElementById('mathExamSetup').style.display='none';document.getElementById('mathExamDone').style.display='none';document.getElementById('mathExamRun').style.display='block';if(mathExam.left>0)mathExam.timer=setInterval(()=>{mathExam.left--;updateMathExamTimer();if(mathExam.left<=0)finishMathExam(true)},1000);renderMathExam();updateMathExamTimer()}
+function updateMathExamTimer(){let el=document.getElementById('mathExamTimer');if(!mathExam.left&&!mathExam.timer){el.textContent='不限時';return}let m=Math.floor(Math.max(0,mathExam.left)/60),s=Math.max(0,mathExam.left)%60;el.textContent=`${m}:${String(s).padStart(2,'0')}`}
+function renderMathExam(){let q=mathExam.q[mathExam.i];document.getElementById('mathExamCounter').textContent=`${mathExam.i+1}/7`;document.getElementById('mathExamBar').style.width=(mathExam.i/7*100)+'%';document.getElementById('mathExamQuestion').textContent=q.prompt;document.getElementById('mathExamVisual').innerHTML=q.visual||'';document.getElementById('mathExamHint').textContent='';document.getElementById('mathExamHint').style.display='none';document.getElementById('mathExamAnswer').value='';document.getElementById('mathExamScratch').value='';setTimeout(()=>document.getElementById('mathExamAnswer').focus(),30)}
+function nextMathExam(){let user=document.getElementById('mathExamAnswer').value;if(!user.trim()){alert('請先輸入答案');return}let q=mathExam.q[mathExam.i],ok=isMathCorrect(q,user);mathExam.answers.push({q,user,ok});MP.answered++;MP.cats[q.cat].attempted++;if(ok){MP.correct++;MP.cats[q.cat].correct++}else MP.cats[q.cat].wrong++;save();if(mathExam.i<6){mathExam.i++;renderMathExam()}else finishMathExam(false)}
+function finishMathExam(timeout){clearInterval(mathExam.timer);mathExam.timer=null;if(timeout){for(let j=mathExam.answers.length;j<7;j++)mathExam.answers.push({q:mathExam.q[j],user:'（未作答）',ok:false})}MP.sessions++;let c=mathExam.answers.filter(x=>x.ok).length,p=Math.round(c/7*100);MP.best=Math.max(MP.best,p);save();document.getElementById('mathExamRun').style.display='none';document.getElementById('mathExamDone').style.display='block';document.getElementById('mathExamScore').textContent=p+'%';document.getElementById('mathExamSummary').innerHTML=`答對 <b>${c}/7</b>${timeout?'；時間到自動交卷。':''}`;document.getElementById('mathExamReview').innerHTML=mathExam.answers.map((x,i)=>`<div style="padding:12px 0;border-bottom:1px solid var(--line)"><b>${i+1}. ${esc(x.q.prompt)}</b>${x.q.visual?`<div class="mathvisual">${x.q.visual}</div>`:''}<div class="examAnswer">你的答案：${esc(x.user)}｜${x.ok?'✓ 正確':'✗ 錯誤'}｜正確：${esc(x.q.answer)}</div><div class="mathsteps"><b>解法：</b><br>${esc(x.q.steps)}</div></div>`).join('');renderMathDash();renderMathReadiness()}function quitMathExam(){if(confirm('確定退出數學模擬？')){clearInterval(mathExam.timer);document.getElementById('mathExamRun').style.display='none';document.getElementById('mathExamSetup').style.display='block'}}
+
+window.addEventListener('error',e=>{showAppMessage(`網頁執行發生錯誤：${e.message||'未知錯誤'}。請重新整理，或用 Safari／Chrome 開啟。`,true)});
+window.addEventListener('unhandledrejection',()=>{showAppMessage('網頁執行被瀏覽器中斷，請重新整理，或用 Safari／Chrome 開啟。',true)});
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('button').forEach(b=>{if(!b.getAttribute('type'))b.setAttribute('type','button')});
+  renderSpellingStats();
+});
+
+initUnitFilter();renderEngDash();renderUnits();renderWords();renderEngReadiness();renderMathCats();renderMathDash();renderMathReadiness();setNav();
+</script></body></html>
