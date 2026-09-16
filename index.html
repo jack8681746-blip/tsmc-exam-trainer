@@ -35,7 +35,7 @@ button{min-height:44px}
 .selftrain{margin-top:16px;padding:15px;border:1px solid #cfd9ea;border-radius:14px;background:#f8fbff}
 .selftrain h3{margin-bottom:5px}
 .selfstats{font-size:13px;color:var(--muted);margin:8px 0 12px}
-.morphtip{margin-top:7px;padding-top:7px;border-top:1px dashed #d7b75c}
+.morphtip{margin-top:7px;padding-top:7px;border-top:1px dashed #d7b75c}.memorymain{line-height:1.65}.soundtip{margin-top:8px;padding:8px 10px;border-radius:10px;background:#f7f2ff;border:1px dashed #cdbaf2;color:#4d2a8b;line-height:1.65}.optiontranslations{margin-top:12px;padding:10px 12px;border-radius:11px;background:#f6f9ff;border:1px solid #cbdaf4;color:#23385f;line-height:1.6}.optiontranslations>b{display:block;color:#184b9b}.optiontranslations ol{margin:6px 0 0;padding-left:22px}.optiontranslations li{margin:3px 0}.optionnum{color:#667085;font-weight:800}
 .mobileNote{display:none}
 #appError{display:none;margin:12px 0;padding:12px 14px;border:1px solid #f1a9a5;border-radius:12px;background:#fff0ef;color:#9d1c18;line-height:1.55}
 @media(max-width:800px){
@@ -230,7 +230,7 @@ const KEY="tsmc288_progress_v2",METAKEY="tsmc288_meta_v2",MATHKEY="tsmc_math_v1"
 const levelNames=["未學","初見","認得","熟悉","穩定","已掌握"],intervals=[0,5*60e3,60*60e3,24*60*60e3,3*24*60*60e3,7*24*60*60e3];
 const MATH_CATS={production:"產能／目標",rate:"百分比／良率反推",time:"跨日／時差",distance:"相向／同向速度",average:"平均數反推",coordinate:"座標圖",chart:"表格／折線圖",basic:"基本計算"};
 let subject=null,P=loadProgress(),M=loadMeta(),MP=loadMath(),SP=loadSpelling();
-let study={queue:[],i:0,results:[],mode:"mixed",locked:false,currentType:"",roundWeak:[],selected:null},flash={unit:1,i:0,flipped:false};
+let study={queue:[],i:0,results:[],mode:"mixed",locked:false,currentType:"",roundWeak:[],selected:null,choices:[]},flash={unit:1,i:0,flipped:false};
 let engExam={q:[],i:0,answers:[],selected:null,left:0,timer:null};
 let mathPractice={q:[],i:0,results:[],locked:false},mathExam={q:[],i:0,answers:[],left:0,timer:null};
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
@@ -379,7 +379,66 @@ function morphTip(w){
   if(e.endsWith('ly'))return `字尾 -ly 常形成副詞；daily / weekly / monthly 這類可直接記成『每…』。`;
   return `這個字不需要硬拆；先用整字＋工作情境記憶，避免拆出錯誤語源。`;
 }
-function fullMemoryTip(w){return `${memoryTip(w)}<div class="morphtip"><b>🔎 字首／字根／字尾：</b>${morphTip(w)}</div>`}
+const SOUND_TIPS={
+2:'諧音：abnormal 就是「欸，不 normal！」不正常，當然就是異常。',
+3:'小劇場：「阿伯，停！」看到 abort 就想像立刻按下中止鍵。',
+11:'air shower 想成進無塵室前，空氣幫你沖一次澡：air 的 shower。',
+14:'align 裡有 line；把東西排成一條 line，就是對準／校準。',
+19:'automatic 有 auto-；機台自己動，記成「auto 自動開工」。',
+23:'backup 是背後撐你的人；電腦說「別怕，我有 backup」。',
+27:'benchmark＝拿一個標準 mark 來比，誰表現好就看這個基準。',
+34:'cassette 像「卡匣」；晶圓乖乖卡在盒子裡等著出發。',
+41:'chip 想像洋芋片 chip；半導體版本是不能吃、但很值錢的晶片。',
+44:'clean chamber 就是乾淨的 chamber；把它想成晶圓的無塵小房間。',
+53:'confidential 像文件上蓋一個大章：不能講，這是機密。',
+62:'cycle time：騎一圈 cycle 還要看 time，合起來就是生產週期。',
+67:'defect 想成產品在說「我有點 defect」；有問題的小地方就是缺陷。',
+74:'emergency stop：緊急時不要英雄式硬撐，直接 stop。',
+79:'equipment 是設備總稱；現場看到一堆 machine，就叫 equipment。',
+81:'etching 想成把圖案「蝕」進去，像用看不見的小刻刀刻電路。',
+86:'fault：設備一鬧脾氣就喊「不是我，是 fault！」＝故障。',
+101:'hard-disk：硬的 disk，電腦裡那顆不會軟掉的硬碟。',
+103:'helmet：安全帽是頭的 safety boss；進場先讓 helmet 上班。',
+105:'hold：機台說 hold，就是先抓住別往下跑＝暫停。',
+115:'inspection：inspect 是檢查，看到 -tion 就記成檢驗這件事。',
+119:'issue：工作群組一說有 issue，大家就知道「有問題要處理」。',
+134:'lithography：把圖樣寫到晶圓上，像超精密的微影畫畫。',
+142:'lot 在工廠不是很多，而是一整批；一 lot 晶圓一起走。',
+145:'manual 跟 automatic 打對台：manual 要人手動，automatic 自己動。',
+148:'mask：日常是口罩，半導體是光罩；都是把不該露出的地方遮住。',
+155:'miss-operation：操作 miss 一下，就變成錯誤操作，千萬別手滑。',
+169:'operation 來自 operate；今天的 operation 不是開刀，是操作。',
+172:'over time：時間超過原本範圍，就想到 overtime＝加班。',
+186:'pod 像小太空艙；晶圓坐進 pod，安全地被送到下一站。',
+199:'priority：主管說 priority first，就是這件先做，別讓它排隊。',
+203:'purge：把裡面的東西吹乾淨；機台深呼吸一口氣，把雜質趕出去。',
+209:'recipe：廚房照食譜做菜；機台照 recipe 跑製程。',
+219:'rework：re 再一次＋work 做一次，做錯就回去重做。',
+224:'SOP 三個字像安全咒語：照標準作業程序做，少出事。',
+228:'scrap：做壞的東西進 scrap 區；不是寶，是報廢品。',
+229:'scratch：被貓抓一下的 scratch，就是表面刮傷。',
+232:'semiconductor：semi 是一半，導電不是全開就是全關，正是半導體。',
+239:'sorter：負責 sort 分類的機器，像很快的晶圓整理員。',
+251:'stocker：stock 是儲存；stocker 就是幫晶圓住旅館的儲存櫃。',
+263:'technician：tech 技術＋人，現場會修會操作的技術員。',
+276:'unload：load 是裝上去，un- 反過來就是卸下來。',
+281:'wafer 像圓圓薄薄的餅；不能吃，但整個晶圓廠都圍著它忙。',
+287:'yield：半導體看到 yield 就想良率；做得越多合格品，yield 越漂亮。'
+};
+function soundTip(w){
+  if(SOUND_TIPS[w.id])return SOUND_TIPS[w.id];
+  return '小劇場：在現場看到「'+esc(w.zh)+'」，心裡立刻念一次「'+esc(w.en)+'」；把發音和畫面綁在一起。';
+}
+function fullMemoryTip(w){
+  return '<div class="memorymain"><b>📌 字義／情境：</b>'+memoryTip(w)+'</div><div class="soundtip"><b>🎭 諧音／小劇場：</b>'+soundTip(w)+'</div><div class="morphtip"><b>🔎 字首／字根／字尾：</b>'+morphTip(w)+'</div>';
+}
+function optionZh(en){const found=WORDS.find(w=>w.en===en)||EXTRA_WORDS.find(w=>w.en===en);return found?found.zh:'（查無中文）'}
+function optionEn(zh){const found=WORDS.find(w=>w.zh===zh)||EXTRA_WORDS.find(w=>w.zh===zh);return found?found.en:''}
+function optionTranslations(options,type){
+  if(!Array.isArray(options)||!options.length)return '';
+  const rows=options.map((choice,i)=>{const en=type==='zh2en'?choice:optionEn(choice),zh=type==='zh2en'?optionZh(choice):choice;const pair=en?'<b>'+esc(en)+'</b>＝'+esc(zh):esc(zh);return '<li><span class="optionnum">'+(i+1)+'.</span> '+pair+'</li>'}).join('');
+  return '<div class="optiontranslations"><b>📘 本題選項中文對照</b><ol>'+rows+'</ol></div>';
+}
 function showAppMessage(msg,isError=false){let el=document.getElementById('appError');if(!el)return;el.style.display='block';el.textContent=msg;if(!isError)setTimeout(()=>{el.style.display='none'},3500)}
 function speakText(text){
   try{
@@ -443,7 +502,7 @@ function startSpelling(n=20,weakOnly=false){
   }else arr=shuffle(WORDS);
   startStudyWithWords(arr.slice(0,n),'spelling',weakOnly?'拼字弱項｜自我加強':'拼字｜自我加強');
 }
-function startStudyWithWords(words,mode,label){subject='eng';setNav();showPage('engStudy');study={queue:words.map(w=>w.id),i:0,results:[],mode,locked:false,currentType:'',roundWeak:[],selected:null,label};document.getElementById('studySetup').style.display='none';document.getElementById('studyDone').style.display='none';document.getElementById('studyRun').style.display='block';renderStudy()}
+function startStudyWithWords(words,mode,label){subject='eng';setNav();showPage('engStudy');study={queue:words.map(w=>w.id),i:0,results:[],mode,locked:false,currentType:'',roundWeak:[],selected:null,choices:[],label};document.getElementById('studySetup').style.display='none';document.getElementById('studyDone').style.display='none';document.getElementById('studyRun').style.display='block';renderStudy()}
 function chooseType(w){if(study.mode!=='mixed')return study.mode;let r=P[w.id];return r.zh2en<r.en2zh?'zh2en':(Math.random()<.5?'en2zh':'zh2en')}
 function distractors(w,field){let pool=shuffle(WORDS.filter(x=>x.id!==w.id&&unitOf(x.id)===unitOf(w.id))).slice(0,3);if(pool.length<3)pool=shuffle(WORDS.filter(x=>x.id!==w.id)).slice(0,3);return shuffle([w,...pool]).map(x=>field==='zh'?x.zh:x.en)}
 
@@ -469,6 +528,7 @@ function renderStudy(){
   }
 
   let cs=distractors(w,type==='en2zh'?'zh':'en');
+  study.choices=cs;
   document.getElementById('studyQuestion').textContent=type==='en2zh'?w.en:w.zh;
   document.getElementById('studySub').textContent=type==='en2zh'?`${w.pos}｜選出正確中文（可按 🔊 聽發音）`:'選出正確英文；按右側 🔊 可先聽發音';
 
@@ -511,11 +571,12 @@ function submitStudy(){
   study.locked=true;updateWord(w,type,ok);study.results.push({id:w.id,ok});
   if(!ok){study.roundWeak.push(w.id);study.queue.splice(Math.min(study.i+5,study.queue.length),0,w.id)}
   document.querySelectorAll('#studyAnswer .choice').forEach(x=>{x.disabled=true;if(x.dataset.v===correct)x.classList.add('correct');else if(x.dataset.v===user)x.classList.add('wrong')});
+  const optionNote=optionTranslations(study.choices,type);
   let fb=document.getElementById('studyFeedback');
   fb.className='feedback show '+(ok?'good':'bad');
   fb.innerHTML=ok
-    ? `<b>✓ 正確</b>　${esc(w.en)} ${esc(w.pos)}＝${esc(w.zh)}`
-    : `<b>✗ 答錯</b><br>正確：<b>${esc(w.en)}</b> ${esc(w.pos)}＝<b>${esc(w.zh)}</b><div class="memorytip"><b>🧠 好記法：</b>${fullMemoryTip(w)}</div>`;
+    ? `<b>✓ 正確</b>　${esc(w.en)} ${esc(w.pos)}＝${esc(w.zh)}`+optionNote
+    : `<b>✗ 答錯</b><br>正確：<b>${esc(w.en)}</b> ${esc(w.pos)}＝<b>${esc(w.zh)}</b><div class="memorytip"><b>🧠 好記法：</b>${fullMemoryTip(w)}</div>${optionNote}`;
   document.getElementById('studyNext').style.display='inline-block';
   M.answered++;if(ok)M.correct++;save();renderEngDash();
 }
