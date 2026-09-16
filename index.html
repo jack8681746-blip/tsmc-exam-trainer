@@ -59,9 +59,19 @@ button{min-height:44px}
 .filebtn{display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
 @media(max-width:800px){.backupgrid{grid-template-columns:1fr}.backupgrid .btn,.filebtn{width:100%}}
 
+
+.syncbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:14px 0 18px;padding:13px 15px;border:1px solid #cfe0f7;border-radius:14px;background:#f7fbff;box-shadow:0 3px 12px rgba(24,88,150,.06)}
+.syncbar strong{display:block;color:#143b68;font-size:14px}.syncbar span{display:block;margin-top:3px;color:#56708f;font-size:12px}.syncactions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.syncbar .btn{white-space:nowrap}.syncbar .ghost{background:#fff}
+@media(max-width:640px){.syncbar{align-items:flex-start;flex-direction:column}.syncactions{width:100%;justify-content:stretch}.syncactions .btn{flex:1}}
+
 </style>
 </head><body><div class="wrap">
 <section class="hero"><h1>台積電技術員｜英文＋數學模擬訓練 V10</h1><p>今天只練一科：先選英文或數學。兩科的練習、錯題、模擬考完全分開。</p><p class="tiny">英文題庫依台積電公開常用英文 288 單字；正式進度只計英翻中／中翻英，拼字為自我加強；數學依公開面試經驗常見題型製作原創模擬題。非台積電官方測驗。</p></section>
+
+<div class="syncbar" id="syncBar" aria-live="polite">
+  <div><strong>☁️ 雲端進度同步</strong><span id="syncStatus">尚未登入：此裝置的進度仍會保留；登入後可與手機／電腦同步。</span></div>
+  <div class="syncactions"><button id="syncLogin" class="btn primary">使用 Google 登入同步</button><button id="syncLogout" class="btn ghost" style="display:none">登出</button></div>
+</div>
 <div id="appError"></div>
 <nav class="topnav" id="nav"><button data-page="home" class="active">首頁選科</button><button class="engNav" data-page="engDash" style="display:none">英文總覽</button><button class="engNav" data-page="engStudy" style="display:none">英文學習</button><button class="engNav" data-page="engUnits" style="display:none">分組背誦</button><button class="engNav" data-page="engWords" style="display:none">288 單字</button><button class="engNav" data-page="engExam" style="display:none">英文模擬考</button><button class="mathNav" data-page="mathDash" style="display:none">數學總覽</button><button class="mathNav" data-page="mathStudy" style="display:none">數學練習</button><button class="mathNav" data-page="mathExam" style="display:none">數學模擬考</button></nav>
 <main>
@@ -230,7 +240,7 @@ function loadProgress(){let x={};try{x=JSON.parse(localStorage.getItem(KEY)||"{}
 function loadMeta(){try{return JSON.parse(localStorage.getItem(METAKEY)||'{"sessions":0,"answered":0,"correct":0}')}catch(e){return {sessions:0,answered:0,correct:0}}}
 function loadMath(){let d={answered:0,correct:0,sessions:0,best:0,cats:{}};try{d=Object.assign(d,JSON.parse(localStorage.getItem(MATHKEY)||"{}"))}catch(e){};Object.keys(MATH_CATS).forEach(k=>d.cats[k]=Object.assign({attempted:0,correct:0,wrong:0},d.cats[k]||{}));return d}
 function loadSpelling(){let d={answered:0,correct:0,byId:{}};try{d=Object.assign(d,JSON.parse(localStorage.getItem(SPELLKEY)||"{}"))}catch(e){};if(!d.byId)d.byId={};return d}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(P));localStorage.setItem(METAKEY,JSON.stringify(M));localStorage.setItem(MATHKEY,JSON.stringify(MP));localStorage.setItem(SPELLKEY,JSON.stringify(SP))}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(P));localStorage.setItem(METAKEY,JSON.stringify(M));localStorage.setItem(MATHKEY,JSON.stringify(MP));localStorage.setItem(SPELLKEY,JSON.stringify(SP));localStorage.setItem(CLOUD_LOCAL_UPDATED_KEY,String(Date.now()));scheduleCloudSave()}catch(e){}}
 function backupPayload(){
   return {
     version:9,
@@ -291,7 +301,7 @@ function importAllProgress(file){
       const hasCurrent=(M.answered||0)+(MP.answered||0)+(SP.answered||0)>0;
       if(hasCurrent&&!confirm('目前瀏覽器已有學習紀錄。確定用備份檔覆蓋目前進度嗎？'))return;
       Object.entries(data).forEach(([k,v])=>localStorage.setItem(k,v));
-      P=loadProgress();M=loadMeta();MP=loadMath();SP=loadSpelling();
+      P=loadProgress();M=loadMeta();MP=loadMath();SP=loadSpelling();save();
       renderEngDash();renderWords();renderEngReadiness();renderMathDash();renderMathCats();renderMathReadiness();renderSpellingStats();
       const eAcc=M.answered?Math.round(M.correct/M.answered*100):0;
       const mAcc=MP.answered?Math.round(MP.correct/MP.answered*100):0;
@@ -761,10 +771,142 @@ function finishMathExam(timeout){clearInterval(mathExam.timer);mathExam.timer=nu
 
 window.addEventListener('error',e=>{showAppMessage(`網頁執行發生錯誤：${e.message||'未知錯誤'}。請重新整理，或用 Safari／Chrome 開啟。`,true)});
 window.addEventListener('unhandledrejection',()=>{showAppMessage('網頁執行被瀏覽器中斷，請重新整理，或用 Safari／Chrome 開啟。',true)});
+
+/* 雲端同步：Firebase Authentication + Cloud Firestore */
+const CLOUD_UID_KEY='tsmc_cloud_uid_v1',CLOUD_LOCAL_UPDATED_KEY='tsmc_cloud_updated_v1';
+const firebaseConfig={apiKey:'AIzaSyA5hh8XNyLYOZJp3DQZKfxaWfDARsRFZ8k',authDomain:'tsmc-exam-trainer.firebaseapp.com',projectId:'tsmc-exam-trainer',storageBucket:'tsmc-exam-trainer.firebasestorage.app',messagingSenderId:'54670794441',appId:'1:54670794441:web:c4b69b1bb47a35988db718'};
+let cloudAuth=null,cloudDb=null,cloudUser=null,cloudDoc=null,cloudDocRef=null,cloudGetDoc=null,cloudSetDoc=null,cloudWriteTimer=null,cloudSyncReady=false;
+
+function syncStatus(message,isError=false){
+  const el=document.getElementById('syncStatus');
+  if(!el)return;
+  el.textContent=message;
+  el.style.color=isError?'#a51d18':'';
+}
+function syncControls(user){
+  const login=document.getElementById('syncLogin'),logout=document.getElementById('syncLogout');
+  if(login)login.style.display=user?'none':'';
+  if(logout)logout.style.display=user?'':'none';
+}
+function currentCloudData(){return {P,M,MP,SP}}
+function hasCloudProgress(data){
+  const m=data&&data.M||{},mp=data&&data.MP||{},sp=data&&data.SP||{};
+  return (+m.answered||0)+(+mp.answered||0)+(+sp.answered||0)>0;
+}
+function mergeCloudValue(a,b){
+  if(typeof a==='number'||typeof b==='number')return Math.max(Number(a)||0,Number(b)||0);
+  if(Array.isArray(a)||Array.isArray(b))return (b||a||[]).slice?((b||a||[]).slice()):(b||a||[]);
+  if(a&&typeof a==='object'||b&&typeof b==='object'){
+    const out={},keys=new Set([...Object.keys(a||{}),...Object.keys(b||{})]);
+    keys.forEach(k=>out[k]=mergeCloudValue(a&&a[k],b&&b[k]));
+    return out;
+  }
+  return b??a??null;
+}
+function mergeCloudData(remote,local){return {P:mergeCloudValue(remote&&remote.P,local&&local.P),M:mergeCloudValue(remote&&remote.M,local&&local.M),MP:mergeCloudValue(remote&&remote.MP,local&&local.MP),SP:mergeCloudValue(remote&&remote.SP,local&&local.SP)}}
+function applyCloudData(data){
+  if(!data||typeof data!=='object')return;
+  localStorage.setItem(KEY,JSON.stringify(data.P||{}));
+  localStorage.setItem(METAKEY,JSON.stringify(data.M||{}));
+  localStorage.setItem(MATHKEY,JSON.stringify(data.MP||{}));
+  localStorage.setItem(SPELLKEY,JSON.stringify(data.SP||{}));
+  P=loadProgress();M=loadMeta();MP=loadMath();SP=loadSpelling();
+  renderEngDash();renderWords();renderEngReadiness();renderMathDash();renderMathCats();renderMathReadiness();renderSpellingStats();
+}
+async function pushCloudProgress(){
+  if(!cloudSyncReady||!cloudDoc||!cloudUser)return;
+  clearTimeout(cloudWriteTimer);cloudWriteTimer=null;
+  try{
+    const now=Date.now();
+    await cloudSetDoc(cloudDoc,{version:1,updatedAt:now,data:currentCloudData()});
+    localStorage.setItem(CLOUD_LOCAL_UPDATED_KEY,String(now));
+    syncStatus('已同步到雲端｜'+(cloudUser.displayName||cloudUser.email||'Google 帳號'));
+  }catch(e){
+    console.warn('雲端同步暫時失敗',e);
+    syncStatus('暫時無法同步，進度仍已留在此裝置。',true);
+  }
+}
+function scheduleCloudSave(){
+  if(!cloudSyncReady||!cloudUser)return;
+  clearTimeout(cloudWriteTimer);
+  cloudWriteTimer=setTimeout(pushCloudProgress,900);
+}
+async function loadCloudProgress(user){
+  cloudUser=user;cloudDoc=cloudDocRef(cloudDb,'users',user.uid);syncControls(user);
+  syncStatus('正在讀取雲端進度…');
+  try{
+    const snap=await cloudGetDoc(cloudDoc);
+    const local=currentCloudData(),knownUser=localStorage.getItem(CLOUD_UID_KEY)===user.uid;
+    const localUpdated=Number(localStorage.getItem(CLOUD_LOCAL_UPDATED_KEY)||0);
+    if(!snap.exists()){
+      localStorage.setItem(CLOUD_UID_KEY,user.uid);
+      cloudSyncReady=true;
+      await pushCloudProgress();
+      return;
+    }
+    const remoteDoc=snap.data()||{},remote=remoteDoc.data||{},remoteUpdated=Number(remoteDoc.updatedAt||0);
+    if(!knownUser&&hasCloudProgress(local)){
+      applyCloudData(mergeCloudData(remote,local));
+      localStorage.setItem(CLOUD_UID_KEY,user.uid);
+      cloudSyncReady=true;
+      await pushCloudProgress();
+      syncStatus('已合併此裝置與雲端的既有進度｜'+(user.displayName||user.email||'Google 帳號'));
+      return;
+    }
+    if(localUpdated>remoteUpdated&&hasCloudProgress(local)){
+      localStorage.setItem(CLOUD_UID_KEY,user.uid);
+      cloudSyncReady=true;
+      await pushCloudProgress();
+      return;
+    }
+    applyCloudData(remote);
+    localStorage.setItem(CLOUD_UID_KEY,user.uid);
+    localStorage.setItem(CLOUD_LOCAL_UPDATED_KEY,String(remoteUpdated||Date.now()));
+    cloudSyncReady=true;
+    syncStatus('已從雲端載入進度｜'+(user.displayName||user.email||'Google 帳號'));
+  }catch(e){
+    console.warn('讀取雲端進度失敗',e);
+    syncStatus('暫時無法讀取雲端，進度仍留在此裝置。',true);
+  }
+}
+async function initCloudSync(){
+  const login=document.getElementById('syncLogin'),logout=document.getElementById('syncLogout');
+  if(!login||!logout)return;
+  try{
+    const [appMod,authMod,firestoreMod]=await Promise.all([
+      import('https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js'),
+      import('https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js'),
+      import('https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js')
+    ]);
+    const app=appMod.initializeApp(firebaseConfig);
+    cloudAuth=authMod.getAuth(app);cloudDb=firestoreMod.getFirestore(app);
+    cloudDocRef=firestoreMod.doc;cloudGetDoc=firestoreMod.getDoc;cloudSetDoc=firestoreMod.setDoc;
+    const provider=new authMod.GoogleAuthProvider();
+    provider.setCustomParameters({prompt:'select_account'});
+    login.addEventListener('click',async()=>{
+      syncStatus('正在開啟 Google 登入…');
+      try{await authMod.signInWithPopup(cloudAuth,provider)}catch(e){
+        console.warn('Google 登入失敗',e);
+        syncStatus(e&&e.code==='auth/unauthorized-domain'?'此網站網域尚未獲 Firebase 授權。':'登入未完成，請再試一次。',true);
+      }
+    });
+    logout.addEventListener('click',async()=>{try{await authMod.signOut(cloudAuth)}catch(e){syncStatus('登出失敗，請再試一次。',true)}});
+    authMod.onAuthStateChanged(cloudAuth,user=>{
+      cloudSyncReady=false;
+      if(user)loadCloudProgress(user);
+      else{cloudUser=null;cloudDoc=null;syncControls(null);syncStatus('尚未登入：此裝置的進度仍會保留；登入後可與手機／電腦同步。')}
+    });
+  }catch(e){
+    console.warn('同步服務初始化失敗',e);
+    syncStatus('同步服務暫時無法啟動，進度仍會保留在此裝置。',true);
+  }
+}
+
+
 document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('button').forEach(b=>{if(!b.getAttribute('type'))b.setAttribute('type','button')});
   renderSpellingStats();
 });
 
-initUnitFilter();renderEngDash();renderUnits();renderWords();renderEngReadiness();renderMathCats();renderMathDash();renderMathReadiness();setNav();
+initUnitFilter();renderEngDash();renderUnits();renderWords();renderEngReadiness();renderMathCats();renderMathDash();renderMathReadiness();setNav();initCloudSync();
 </script></body></html>
